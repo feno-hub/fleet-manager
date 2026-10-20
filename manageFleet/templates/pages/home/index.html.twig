@@ -1,12 +1,322 @@
-{% extends "layouts/base.html.twig" %}
+{% extends 'layouts/base.html.twig' %}
 
-{% block title %}
-    FleetManager
-{% endblock %}
+{% block title %}FleetManager{% endblock %}
 
 {% block body %}
 
-<div class="">
-    
-</div>
+    <header class="home-header">
+
+        <video class="home-header-video" autoplay muted loop playsinline>
+            <source src="{{ asset('assets/videos/video1.mp4') }}" type="video/mp4">
+        </video>
+
+        <div class="home-header-overlay"></div>
+
+       
+
+        <section class="home-hero" id="accueil">
+            <div class="home-hero-content">
+
+                <span class="home-hero-badge">
+                    <i class="fa-solid fa-location-dot"></i>
+                    La gestion de flotte simplifiée
+                </span>
+
+                <h1>
+                    Votre flotte automobile,
+                    <span>maîtrisée de A à Z.</span>
+                </h1>
+
+                <p>
+                    Centralisez vos véhicules, suivez vos conducteurs et
+                    optimisez vos coûts dans une seule plateforme.
+                    Prenez de meilleures décisions pour votre entreprise.
+                </p>
+
+                <div class="home-hero-actions">
+                    <a href="register.html" class="home-btn home-btn-primary">
+                        Découvrir la plateforme
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                    <a href="#fonctionnalites" class="home-btn home-btn-outline">
+                        <i class="fa-solid fa-circle-play"></i>
+                        Explorer les fonctionnalités
+                    </a>
+                </div>
+
+                <div class="home-hero-trust">
+                    <div class="home-trust-item">
+                        <i class="fa-solid fa-check-circle"></i>
+                        Suivi centralisé
+                    </div>
+                    <div class="home-trust-item">
+                        <i class="fa-solid fa-check-circle"></i>
+                        Coûts maîtrisés
+                    </div>
+                    <div class="home-trust-item">
+                        <i class="fa-solid fa-check-circle"></i>
+                        Gestion simplifiée
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="home-hero-scroll">
+                <span></span>
+                Découvrez notre solution
+            </div>
+        </section>
+    </header>
+
+    <main>
+
+        <section class="home-stats">
+            <div class="home-stat">
+                <i class="fa-solid fa-car"></i>
+                <div>
+                    <h3>Véhicules</h3>
+                    <p>Une flotte centralisée</p>
+                </div>
+            </div>
+
+            <div class="home-stat">
+                <i class="fa-solid fa-route"></i>
+                <div>
+                    <h3>Trajets</h3>
+                    <p>Un meilleur suivi</p>
+                </div>
+            </div>
+
+            <div class="home-stat">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                <div>
+                    <h3>Maintenance</h3>
+                    <p>Un entretien planifié</p>
+                </div>
+            </div>
+
+            <div class="home-stat">
+                <i class="fa-solid fa-chart-line"></i>
+                <div>
+                    <h3>Performances</h3>
+                    <p>Des coûts optimisés</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-features" id="fonctionnalites">
+
+            <div class="home-section-heading">
+                <span class="home-section-tag">NOS FONCTIONNALITÉS</span>
+                <h2>Tout pour gérer votre flotte <span>intelligemment.</span></h2>
+                <p>
+                    Les outils essentiels pour contrôler votre parc automobile
+                    et améliorer votre organisation quotidienne.
+                </p>
+            </div>
+
+            <div class="home-features-grid">
+
+                <article class="home-feature-card">
+                    <div class="home-feature-icon">
+                        <i class="fa-solid fa-car-side"></i>
+                    </div>
+                    <h3>Gestion des véhicules</h3>
+                    <p>
+                        Retrouvez les informations, les documents et
+                        l'historique de chaque véhicule au même endroit.
+                    </p>
+                    <a href="#contact">En savoir plus <i class="fa-solid fa-arrow-right"></i></a>
+                </article>
+
+                <article class="home-feature-card">
+                    <div class="home-feature-icon">
+                        <i class="fa-solid fa-users"></i>
+                    </div>
+                    <h3>Gestion des conducteurs</h3>
+                    <p>
+                        Organisez les affectations, gérez les profils et
+                        suivez les informations de vos conducteurs.
+                    </p>
+                    <a href="#contact">En savoir plus <i class="fa-solid fa-arrow-right"></i></a>
+                </article>
+
+                <article class="home-feature-card">
+                    <div class="home-feature-icon">
+                        <i class="fa-solid fa-wrench"></i>
+                    </div>
+                    <h3>Maintenance préventive</h3>
+                    <p>
+                        Planifiez les entretiens, suivez les réparations
+                        et anticipez les échéances importantes.
+                    </p>
+                    <a href="#contact">En savoir plus <i class="fa-solid fa-arrow-right"></i></a>
+                </article>
+
+                <article class="home-feature-card">
+                    <div class="home-feature-icon">
+                        <i class="fa-solid fa-wallet"></i>
+                    </div>
+                    <h3>Suivi des dépenses</h3>
+                    <p>
+                        Analysez les dépenses de carburant, d'entretien
+                        et les autres coûts de votre flotte.
+                    </p>
+                    <a href="#contact">En savoir plus <i class="fa-solid fa-arrow-right"></i></a>
+                </article>
+
+                <article class="home-feature-card">
+                    <div class="home-feature-icon">
+                        <i class="fa-solid fa-file-lines"></i>
+                    </div>
+                    <h3>Documents et échéances</h3>
+                    <p>
+                        Centralisez les documents des véhicules et
+                        surveillez les dates d'expiration.
+                    </p>
+                    <a href="#contact">En savoir plus <i class="fa-solid fa-arrow-right"></i></a>
+                </article>
+
+                <article class="home-feature-card">
+                    <div class="home-feature-icon">
+                        <i class="fa-solid fa-chart-pie"></i>
+                    </div>
+                    <h3>Rapports et statistiques</h3>
+                    <p>
+                        Consultez vos indicateurs pour identifier
+                        les dépenses et améliorer votre rentabilité.
+                    </p>
+                    <a href="#contact">En savoir plus <i class="fa-solid fa-arrow-right"></i></a>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="home-advantages" id="avantages">
+            <div class="home-advantages-content">
+                <span class="home-section-tag">POURQUOI FLEETMANAGER ?</span>
+                <h2>Une gestion plus simple. <span>Des décisions plus efficaces.</span></h2>
+                <p>
+                    Remplacez les fichiers dispersés par une plateforme
+                    conçue pour vous donner une vision claire de votre flotte.
+                </p>
+
+                <ul>
+                    <li><i class="fa-solid fa-circle-check"></i> Toutes vos informations au même endroit</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Un meilleur suivi des dépenses</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Des échéances mieux organisées</li>
+                    <li><i class="fa-solid fa-circle-check"></i> Des rapports accessibles rapidement</li>
+                </ul>
+
+                <a href="register.html" class="home-btn home-btn-primary">
+                    Créer mon compte <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="home-advantages-visual">
+                <div class="home-dashboard-card">
+                    <div class="home-dashboard-heading">
+                        <div>
+                            <span>TABLEAU DE BORD</span>
+                            <h3>Vue d'ensemble</h3>
+                        </div>
+                        <i class="fa-solid fa-chart-column"></i>
+                    </div>
+
+                    <div class="home-dashboard-metrics">
+                        <div>
+                            <span>Parc automobile</span>
+                            <strong><i class="fa-solid fa-car"></i> Véhicules</strong>
+                        </div>
+                        <div>
+                            <span>Entretien</span>
+                            <strong><i class="fa-solid fa-wrench"></i> Échéances</strong>
+                        </div>
+                        <div>
+                            <span>Finances</span>
+                            <strong><i class="fa-solid fa-wallet"></i> Dépenses</strong>
+                        </div>
+                    </div>
+
+                    <div class="home-dashboard-bottom">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        <span>Une meilleure visibilité sur votre flotte</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="home-pricing" id="tarifs">
+            <div class="home-section-heading">
+                <span class="home-section-tag">NOS ABONNEMENTS</span>
+                <h2>Une offre adaptée à <span>votre flotte.</span></h2>
+                <p>Choisissez une formule selon vos besoins et la taille de votre parc automobile.</p>
+            </div>
+
+            <div class="home-pricing-grid">
+
+                <article class="home-price-card">
+                    <h3>Starter</h3>
+                    <p>Pour commencer à organiser votre flotte.</p>
+                    <div class="home-price">Gratuit</div>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> Gestion des véhicules</li>
+                        <li><i class="fa-solid fa-check"></i> Informations essentielles</li>
+                        <li><i class="fa-solid fa-check"></i> Accès au tableau de bord</li>
+                    </ul>
+                    <a href="register.html" class="home-btn home-btn-price">Choisir Starter</a>
+                </article>
+
+                <article class="home-price-card home-price-featured">
+                    <span class="home-price-badge">RECOMMANDÉ</span>
+                    <h3>Business</h3>
+                    <p>Pour les entreprises en développement.</p>
+                    <div class="home-price">Sur devis</div>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> Gestion avancée des véhicules</li>
+                        <li><i class="fa-solid fa-check"></i> Suivi de la maintenance</li>
+                        <li><i class="fa-solid fa-check"></i> Gestion des conducteurs</li>
+                        <li><i class="fa-solid fa-check"></i> Rapports et statistiques</li>
+                    </ul>
+                    <a href="register.html" class="home-btn home-btn-primary">Choisir Business</a>
+                </article>
+
+                <article class="home-price-card">
+                    <h3>Enterprise</h3>
+                    <p>Pour les grandes flottes et les besoins spécifiques.</p>
+                    <div class="home-price">Personnalisé</div>
+                    <ul>
+                        <li><i class="fa-solid fa-check"></i> Fonctionnalités avancées</li>
+                        <li><i class="fa-solid fa-check"></i> Gestion multi-utilisateurs</li>
+                        <li><i class="fa-solid fa-check"></i> Rapports personnalisés</li>
+                    </ul>
+                    <a href="#contact" class="home-btn home-btn-price">Nous contacter</a>
+                </article>
+
+            </div>
+        </section>
+
+        <section class="home-cta" id="contact">
+            <div>
+                <span>PRENEZ LE CONTRÔLE DE VOTRE FLOTTE</span>
+                <h2>Prêt à simplifier votre gestion automobile ?</h2>
+                <p>Découvrez une nouvelle façon d'organiser votre parc automobile.</p>
+            </div>
+            <a href="register.html" class="home-btn home-btn-light">
+                Commencer maintenant <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </section>
+
+    </main>
+
+    <footer class="home-footer">
+        <a href="#" class="home-logo">
+            <i class="fa-solid fa-truck-fast"></i>
+            <span>Fleet<span class="home-logo-highlight">Manager</span></span>
+        </a>
+        <p>© 2026 FleetManager. Tous droits réservés.</p>
+        <a href="#accueil">Retour en haut <i class="fa-solid fa-arrow-up"></i></a>
+    </footer>
+
 {% endblock %}

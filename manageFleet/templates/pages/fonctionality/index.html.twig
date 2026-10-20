@@ -1,0 +1,455 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Comment ça fonctionne{% endblock %}
+
+{% block body %}
+
+<div class="features">
+
+
+    <main>
+        <section class="features-hero">
+            <div class="features-hero-overlay"></div>
+
+            <div class="features-container features-hero-content">
+                <span class="features-hero-label">
+                    <i class="fa-solid fa-gears"></i>
+                    Une plateforme complète
+                </span>
+
+                <h1>Toutes les fonctionnalités pour <span>maîtriser votre flotte</span></h1>
+
+                <p>
+                    De la gestion des véhicules au suivi des dépenses, découvrez
+                    les outils qui vous permettent de simplifier votre quotidien
+                    et d'améliorer les performances de votre entreprise.
+                </p>
+
+                <div class="features-hero-actions">
+                    <a href="#features-list" class="features-button features-button-primary">
+                        Découvrir les fonctionnalités
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </a>
+
+                    <a href="register.html" class="features-button features-button-outline">
+                        Créer un compte
+                    </a>
+                </div>
+
+                <div class="features-hero-benefits">
+                    <span><i class="fa-solid fa-check-circle"></i> Gestion centralisée</span>
+                    <span><i class="fa-solid fa-check-circle"></i> Suivi simplifié</span>
+                    <span><i class="fa-solid fa-check-circle"></i> Meilleure visibilité</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-intro">
+            <div class="features-container">
+                <div class="features-section-heading">
+                    <span class="features-section-label">Une gestion plus intelligente</span>
+                    <h2>Tout votre parc automobile, sur une seule plateforme</h2>
+                    <p>
+                        FleetManager rassemble les outils essentiels pour suivre
+                        vos véhicules, organiser vos opérations et maîtriser vos coûts.
+                    </p>
+                </div>
+
+                <div class="features-overview">
+                    <div class="features-overview-card">
+                        <div class="features-overview-icon">
+                            <i class="fa-solid fa-car"></i>
+                        </div>
+                        <div>
+                            <strong>Gestion centralisée</strong>
+                            <span>Les informations de votre flotte réunies au même endroit.</span>
+                        </div>
+                    </div>
+
+                    <div class="features-overview-card">
+                        <div class="features-overview-icon">
+                            <i class="fa-solid fa-bell"></i>
+                        </div>
+                        <div>
+                            <strong>Suivi des échéances</strong>
+                            <span>Une meilleure anticipation des opérations importantes.</span>
+                        </div>
+                    </div>
+
+                    <div class="features-overview-card">
+                        <div class="features-overview-icon">
+                            <i class="fa-solid fa-chart-pie"></i>
+                        </div>
+                        <div>
+                            <strong>Analyse des performances</strong>
+                            <span>Des indicateurs pour comprendre les coûts et l'activité.</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-list-section" id="features-list">
+            <div class="features-container">
+                <div class="features-section-heading">
+                    <span class="features-section-label">Nos outils</span>
+                    <h2>Des fonctionnalités adaptées à vos besoins</h2>
+                    <p>
+                        Chaque fonctionnalité répond à un besoin concret de la gestion
+                        de votre flotte automobile.
+                    </p>
+                </div>
+
+                <div class="features-grid">
+
+                    <article class="features-card">
+                        <div class="features-card-top">
+                            <div class="features-card-icon features-icon-blue">
+                                <i class="fa-solid fa-car-side"></i>
+                            </div>
+                            <span class="features-card-number">01</span>
+                        </div>
+                        <h3>Gestion des véhicules</h3>
+                        <p>
+                            Centralisez les informations de vos véhicules et consultez
+                            rapidement leur état et leur historique.
+                        </p>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Immatriculation et modèle</li>
+                            <li><i class="fa-solid fa-check"></i> Kilométrage et état</li>
+                            <li><i class="fa-solid fa-check"></i> Historique des opérations</li>
+                            <li><i class="fa-solid fa-check"></i> Affectation aux conducteurs</li>
+                        </ul>
+                    </article>
+
+                    <article class="features-card">
+                        <div class="features-card-top">
+                            <div class="features-card-icon features-icon-orange">
+                                <i class="fa-solid fa-screwdriver-wrench"></i>
+                            </div>
+                            <span class="features-card-number">02</span>
+                        </div>
+                        <h3>Maintenance et entretien</h3>
+                        <p>
+                            Planifiez les entretiens et suivez les réparations pour
+                            réduire les immobilisations imprévues.
+                        </p>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Calendrier d'entretien</li>
+                            <li><i class="fa-solid fa-check"></i> Suivi des réparations</li>
+                            <li><i class="fa-solid fa-check"></i> Historique de maintenance</li>
+                            <li><i class="fa-solid fa-check"></i> Rappels des échéances</li>
+                        </ul>
+                    </article>
+
+                    <article class="features-card">
+                        <div class="features-card-top">
+                            <div class="features-card-icon features-icon-green">
+                                <i class="fa-solid fa-gas-pump"></i>
+                            </div>
+                            <span class="features-card-number">03</span>
+                        </div>
+                        <h3>Carburant et dépenses</h3>
+                        <p>
+                            Enregistrez les dépenses de chaque véhicule et identifiez
+                            les principales sources de coûts.
+                        </p>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Historique du carburant</li>
+                            <li><i class="fa-solid fa-check"></i> Suivi des dépenses</li>
+                            <li><i class="fa-solid fa-check"></i> Coût par véhicule</li>
+                            <li><i class="fa-solid fa-check"></i> Comparaison des dépenses</li>
+                        </ul>
+                    </article>
+
+                    <article class="features-card">
+                        <div class="features-card-top">
+                            <div class="features-card-icon features-icon-purple">
+                                <i class="fa-solid fa-users"></i>
+                            </div>
+                            <span class="features-card-number">04</span>
+                        </div>
+                        <h3>Gestion des conducteurs</h3>
+                        <p>
+                            Organisez les informations de vos conducteurs et suivez
+                            les affectations des véhicules.
+                        </p>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Fiches des conducteurs</li>
+                            <li><i class="fa-solid fa-check"></i> Affectations des véhicules</li>
+                            <li><i class="fa-solid fa-check"></i> Informations de permis</li>
+                            <li><i class="fa-solid fa-check"></i> Suivi des échéances</li>
+                        </ul>
+                    </article>
+
+                    <article class="features-card">
+                        <div class="features-card-top">
+                            <div class="features-card-icon features-icon-red">
+                                <i class="fa-solid fa-file-shield"></i>
+                            </div>
+                            <span class="features-card-number">05</span>
+                        </div>
+                        <h3>Documents et assurances</h3>
+                        <p>
+                            Gardez les documents importants accessibles et anticipez
+                            leurs dates de renouvellement.
+                        </p>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Documents des véhicules</li>
+                            <li><i class="fa-solid fa-check"></i> Suivi des assurances</li>
+                            <li><i class="fa-solid fa-check"></i> Visites techniques</li>
+                            <li><i class="fa-solid fa-check"></i> Alertes avant expiration</li>
+                        </ul>
+                    </article>
+
+                    <article class="features-card">
+                        <div class="features-card-top">
+                            <div class="features-card-icon features-icon-cyan">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </div>
+                            <span class="features-card-number">06</span>
+                        </div>
+                        <h3>Rapports et statistiques</h3>
+                        <p>
+                            Analysez l'utilisation de votre flotte grâce à des données
+                            synthétiques et faciles à comprendre.
+                        </p>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Tableau de bord</li>
+                            <li><i class="fa-solid fa-check"></i> Coûts par période</li>
+                            <li><i class="fa-solid fa-check"></i> Indicateurs de performance</li>
+                            <li><i class="fa-solid fa-check"></i> Rapports de synthèse</li>
+                        </ul>
+                    </article>
+
+                    <article class="features-card">
+                        <div class="features-card-top">
+                            <div class="features-card-icon features-icon-indigo">
+                                <i class="fa-solid fa-bell"></i>
+                            </div>
+                            <span class="features-card-number">07</span>
+                        </div>
+                        <h3>Alertes et notifications</h3>
+                        <p>
+                            Repérez les actions à prévoir grâce aux rappels liés
+                            à vos véhicules et à vos opérations.
+                        </p>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Échéances d'entretien</li>
+                            <li><i class="fa-solid fa-check"></i> Renouvellement des documents</li>
+                            <li><i class="fa-solid fa-check"></i> Rappels de suivi</li>
+                            <li><i class="fa-solid fa-check"></i> Alertes à traiter</li>
+                        </ul>
+                    </article>
+
+                    <article class="features-card">
+                        <div class="features-card-top">
+                            <div class="features-card-icon features-icon-dark">
+                                <i class="fa-solid fa-user-lock"></i>
+                            </div>
+                            <span class="features-card-number">08</span>
+                        </div>
+                        <h3>Utilisateurs et accès</h3>
+                        <p>
+                            Organisez les accès à la plateforme en fonction des
+                            responsabilités de chaque utilisateur.
+                        </p>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Gestion des comptes</li>
+                            <li><i class="fa-solid fa-check"></i> Rôles et permissions</li>
+                            <li><i class="fa-solid fa-check"></i> Accès à l'espace de gestion</li>
+                            <li><i class="fa-solid fa-check"></i> Gestion de l'abonnement</li>
+                        </ul>
+                    </article>
+
+                    <article class="features-card">
+                        <div class="features-card-top">
+                            <div class="features-card-icon features-icon-teal">
+                                <i class="fa-solid fa-file-invoice-dollar"></i>
+                            </div>
+                            <span class="features-card-number">09</span>
+                        </div>
+                        <h3>Budget et rentabilité</h3>
+                        <p>
+                            Suivez les coûts de fonctionnement et préparez vos décisions
+                            à partir des dépenses enregistrées.
+                        </p>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Vue globale des dépenses</li>
+                            <li><i class="fa-solid fa-check"></i> Répartition des coûts</li>
+                            <li><i class="fa-solid fa-check"></i> Comparaison par véhicule</li>
+                            <li><i class="fa-solid fa-check"></i> Suivi budgétaire</li>
+                        </ul>
+                    </article>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="features-workflow">
+            <div class="features-container features-workflow-layout">
+                <div class="features-workflow-content">
+                    <span class="features-section-label">Une meilleure organisation</span>
+                    <h2>Gardez une vision claire de vos opérations</h2>
+                    <p>
+                        Retrouvez vos informations essentielles dans un espace centralisé.
+                        Organisez votre travail, identifiez les priorités et suivez
+                        l'évolution de votre flotte.
+                    </p>
+
+                    <div class="features-workflow-item">
+                        <span><i class="fa-solid fa-check"></i></span>
+                        <div>
+                            <h3>Des informations accessibles</h3>
+                            <p>Consultez les données utiles sans multiplier les fichiers.</p>
+                        </div>
+                    </div>
+
+                    <div class="features-workflow-item">
+                        <span><i class="fa-solid fa-check"></i></span>
+                        <div>
+                            <h3>Des opérations mieux organisées</h3>
+                            <p>Suivez les tâches et les échéances importantes.</p>
+                        </div>
+                    </div>
+
+                    <div class="features-workflow-item">
+                        <span><i class="fa-solid fa-check"></i></span>
+                        <div>
+                            <h3>Des décisions plus éclairées</h3>
+                            <p>Utilisez les informations disponibles pour piloter vos coûts.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="features-workflow-visual">
+                    <div class="features-workflow-window">
+                        <div class="features-window-header">
+                            <span><i class="fa-solid fa-circle"></i></span>
+                            <span><i class="fa-solid fa-circle"></i></span>
+                            <span><i class="fa-solid fa-circle"></i></span>
+                            <strong>Tableau de bord</strong>
+                        </div>
+
+                        <div class="features-window-content">
+                            <div class="features-window-title">
+                                <div>
+                                    <small>VOTRE ESPACE</small>
+                                    <h3>Vue générale</h3>
+                                </div>
+                                <i class="fa-solid fa-chart-simple"></i>
+                            </div>
+
+                            <div class="features-window-stats">
+                                <div>
+                                    <i class="fa-solid fa-car"></i>
+                                    <small>Véhicules</small>
+                                    <strong>24</strong>
+                                </div>
+                                <div>
+                                    <i class="fa-solid fa-check-circle"></i>
+                                    <small>Disponibles</small>
+                                    <strong>22</strong>
+                                </div>
+                                <div>
+                                    <i class="fa-solid fa-wrench"></i>
+                                    <small>En entretien</small>
+                                    <strong>02</strong>
+                                </div>
+                            </div>
+
+                            <div class="features-window-report">
+                                <h4>Répartition de l'activité</h4>
+                                <div class="features-window-bars">
+                                    <span style="--bar-height: 42%"></span>
+                                    <span style="--bar-height: 67%"></span>
+                                    <span style="--bar-height: 52%"></span>
+                                    <span style="--bar-height: 88%"></span>
+                                    <span style="--bar-height: 62%"></span>
+                                    <span style="--bar-height: 76%"></span>
+                                    <span style="--bar-height: 94%"></span>
+                                </div>
+                                <div class="features-window-days">
+                                    <span>Lun.</span><span>Mar.</span><span>Mer.</span>
+                                    <span>Jeu.</span><span>Ven.</span><span>Sam.</span><span>Dim.</span>
+                                </div>
+                            </div>
+
+                            <div class="features-window-notice">
+                                <i class="fa-solid fa-bell"></i>
+                                <div>
+                                    <strong>Échéances à vérifier</strong>
+                                    <small>Consultez vos prochains entretiens.</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-cta">
+            <div class="features-container features-cta-content">
+                <div>
+                    <span class="features-cta-label">Prêt à commencer ?</span>
+                    <h2>Simplifiez dès maintenant la gestion de votre flotte.</h2>
+                    <p>Créez votre compte et découvrez une nouvelle façon de gérer vos véhicules.</p>
+                </div>
+
+                <a href="register.html" class="features-button features-button-primary">
+                    Créer mon compte <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="features-footer">
+        <div class="features-container">
+            <div class="features-footer-grid">
+                <div class="features-footer-brand">
+                    <a href="index.html" class="features-logo">
+                        <i class="fa-solid fa-car-side"></i>
+                        <span>Fleet<span class="features-logo-accent">Manager</span></span>
+                    </a>
+                    <p>
+                        Une solution conçue pour simplifier la gestion
+                        et améliorer le suivi de votre flotte automobile.
+                    </p>
+                </div>
+
+                <div class="features-footer-column">
+                    <h3>Navigation</h3>
+                    <a href="index.html">Accueil</a>
+                    <a href="fonctionnalites.html">Fonctionnalités</a>
+                    <a href="index.html#avantages">Avantages</a>
+                    <a href="index.html#tarifs">Tarifs</a>
+                </div>
+
+                <div class="features-footer-column">
+                    <h3>Mon compte</h3>
+                    <a href="login.html">Se connecter</a>
+                    <a href="register.html">Créer un compte</a>
+                    <a href="index.html#apropos">À propos</a>
+                </div>
+
+                <div class="features-footer-social">
+                    <h3>Suivez-nous</h3>
+                    <div>
+                        <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="features-footer-bottom">
+                <p>&copy; 2026 FleetManager. Tous droits réservés.</p>
+                <a href="index.html">Retour à l'accueil</a>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+
+{% endblock %}
