@@ -1,0 +1,419 @@
+
+{% extends 'layouts/account.html.twig' %}
+
+{% block title %}Gestion des véhicules - FleetManager{% endblock %}
+
+{% block body %}
+    <div class="dashboard-page vehicle-page">
+
+        {% include "partials/_aside.html.twig" %}
+
+        <main class="dashboard-main">
+
+            <header class="dashboard-header">
+                <div class="dashboard-header-title">
+                    <span class="dashboard-eyebrow">ESPACE DE GESTION</span>
+                    <h1>Gestion des véhicules</h1>
+                    <p>Consultez, organisez et gérez l'ensemble de votre flotte automobile.</p>
+                </div>
+
+                <div class="dashboard-header-actions">
+                    <button type="button" class="dashboard-icon-button" aria-label="Notifications">
+                        <i class="fa-regular fa-bell"></i>
+                        <span class="dashboard-notification-dot"></span>
+                    </button>
+
+                    <div class="dashboard-header-user">
+                        <div class="dashboard-avatar dashboard-avatar-small">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div>
+                            <strong>{{ app.user ? app.user.firstName : 'Utilisateur' }}</strong>
+                            <span>Gestionnaire de flotte</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <section class="vehicle-intro">
+                <div>
+                    <span class="dashboard-welcome-label">VOTRE PARC AUTOMOBILE</span>
+                    <h2>Tous vos véhicules au même endroit</h2>
+                    <p>Suivez leur disponibilité, leur kilométrage et leur état actuel.</p>
+                </div>
+
+                <a href="#ajouter-vehicule" class="dashboard-primary-button">
+                    <i class="fa-solid fa-plus"></i>
+                    Ajouter un véhicule
+                </a>
+            </section>
+
+            <section class="dashboard-stats vehicle-stats">
+                <article class="dashboard-stat-card">
+                    <div class="dashboard-stat-top">
+                        <span class="dashboard-stat-icon dashboard-icon-blue">
+                            <i class="fa-solid fa-car"></i>
+                        </span>
+                        <span class="dashboard-stat-caption">Total véhicules</span>
+                    </div>
+                    <strong class="dashboard-stat-number">24</strong>
+                    <div class="dashboard-stat-bottom">
+                        <span class="dashboard-stat-neutral">Véhicules enregistrés</span>
+                    </div>
+                </article>
+
+                <article class="dashboard-stat-card">
+                    <div class="dashboard-stat-top">
+                        <span class="dashboard-stat-icon dashboard-icon-green">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </span>
+                        <span class="dashboard-stat-caption">Disponibles</span>
+                    </div>
+                    <strong class="dashboard-stat-number">18</strong>
+                    <div class="dashboard-stat-bottom">
+                        <span class="dashboard-stat-positive">Prêts à être utilisés</span>
+                    </div>
+                </article>
+
+                <article class="dashboard-stat-card">
+                    <div class="dashboard-stat-top">
+                        <span class="dashboard-stat-icon dashboard-icon-orange">
+                            <i class="fa-solid fa-route"></i>
+                        </span>
+                        <span class="dashboard-stat-caption">En mission</span>
+                    </div>
+                    <strong class="dashboard-stat-number">3</strong>
+                    <div class="dashboard-stat-bottom">
+                        <span class="dashboard-stat-neutral">Véhicules utilisés</span>
+                    </div>
+                </article>
+
+                <article class="dashboard-stat-card">
+                    <div class="dashboard-stat-top">
+                        <span class="dashboard-stat-icon dashboard-icon-purple">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </span>
+                        <span class="dashboard-stat-caption">En entretien</span>
+                    </div>
+                    <strong class="dashboard-stat-number">3</strong>
+                    <div class="dashboard-stat-bottom">
+                        <span class="dashboard-stat-warning">À contrôler</span>
+                    </div>
+                </article>
+            </section>
+
+            <section class="dashboard-panel vehicle-list-panel">
+
+                <div class="dashboard-panel-header vehicle-list-header">
+                    <div>
+                        <h3>Liste des véhicules</h3>
+                        <p>Retrouvez et gérez vos véhicules enregistrés.</p>
+                    </div>
+                    <span class="vehicle-total-badge">
+                        <i class="fa-solid fa-car-side"></i>
+                        <span id="vehicle-count">6 véhicules</span>
+                    </span>
+                </div>
+
+                <div class="vehicle-toolbar">
+                    <div class="vehicle-search">
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                        <input
+                            type="search"
+                            id="vehicle-search"
+                            placeholder="Rechercher un véhicule, une plaque..."
+                            aria-label="Rechercher un véhicule"
+                        >
+                    </div>
+
+                    <div class="vehicle-filters">
+                        <select id="vehicle-status" aria-label="Filtrer par statut">
+                            <option value="">Tous les statuts</option>
+                            <option value="Disponible">Disponible</option>
+                            <option value="En mission">En mission</option>
+                            <option value="En entretien">En entretien</option>
+                        </select>
+
+                        <select id="vehicle-category" aria-label="Filtrer par catégorie">
+                            <option value="">Toutes les catégories</option>
+                            <option value="SUV">SUV</option>
+                            <option value="Pickup">Pickup</option>
+                            <option value="Utilitaire">Utilitaire</option>
+                            <option value="Berline">Berline</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="dashboard-table-wrapper vehicle-table-wrapper">
+                    <table class="dashboard-table vehicle-table">
+                        <thead>
+                            <tr>
+                                <th>Véhicule</th>
+                                <th>Immatriculation</th>
+                                <th>Conducteur</th>
+                                <th>Kilométrage</th>
+                                <th>Statut</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+
+                        <tbody id="vehicle-table-body">
+                            <tr data-status="Disponible" data-category="Pickup">
+                                <td>
+                                    <div class="dashboard-vehicle-name">
+                                        <span class="dashboard-vehicle-icon">
+                                            <i class="fa-solid fa-truck-pickup"></i>
+                                        </span>
+                                        <div>
+                                            <strong>Toyota Hilux</strong>
+                                            <span>Pickup · 2023</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>1023 TBA</td>
+                                <td>Jean Rakoto</td>
+                                <td>45 200 km</td>
+                                <td><span class="dashboard-status dashboard-status-available">Disponible</span></td>
+                                <td>
+                                    <div class="vehicle-actions">
+                                        <a href="#details-hilux" aria-label="Détails Toyota Hilux" title="Détails">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                        <a href="#modifier-hilux" aria-label="Modifier Toyota Hilux" title="Modifier">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                        <button type="button" class="vehicle-delete" aria-label="Supprimer Toyota Hilux" title="Supprimer">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr data-status="En mission" data-category="SUV">
+                                <td>
+                                    <div class="dashboard-vehicle-name">
+                                        <span class="dashboard-vehicle-icon">
+                                            <i class="fa-solid fa-car-side"></i>
+                                        </span>
+                                        <div>
+                                            <strong>Renault Duster</strong>
+                                            <span>SUV · 2022</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>4587 TBC</td>
+                                <td>Marie Rasoanaivo</td>
+                                <td>32 800 km</td>
+                                <td><span class="dashboard-status dashboard-status-used">En mission</span></td>
+                                <td>
+                                    <div class="vehicle-actions">
+                                        <a href="#details-duster" aria-label="Détails Renault Duster" title="Détails">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                        <a href="#modifier-duster" aria-label="Modifier Renault Duster" title="Modifier">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                        <button type="button" class="vehicle-delete" aria-label="Supprimer Renault Duster" title="Supprimer">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr data-status="En entretien" data-category="Utilitaire">
+                                <td>
+                                    <div class="dashboard-vehicle-name">
+                                        <span class="dashboard-vehicle-icon">
+                                            <i class="fa-solid fa-van-shuttle"></i>
+                                        </span>
+                                        <div>
+                                            <strong>Peugeot Partner</strong>
+                                            <span>Utilitaire · 2021</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>6721 TBA</td>
+                                <td>Non assigné</td>
+                                <td>68 150 km</td>
+                                <td><span class="dashboard-status dashboard-status-maintenance">En entretien</span></td>
+                                <td>
+                                    <div class="vehicle-actions">
+                                        <a href="#details-partner" aria-label="Détails Peugeot Partner" title="Détails">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                        <a href="#modifier-partner" aria-label="Modifier Peugeot Partner" title="Modifier">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                        <button type="button" class="vehicle-delete" aria-label="Supprimer Peugeot Partner" title="Supprimer">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr data-status="Disponible" data-category="SUV">
+                                <td>
+                                    <div class="dashboard-vehicle-name">
+                                        <span class="dashboard-vehicle-icon">
+                                            <i class="fa-solid fa-car"></i>
+                                        </span>
+                                        <div>
+                                            <strong>Hyundai Tucson</strong>
+                                            <span>SUV · 2024</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>8214 TBC</td>
+                                <td>Paul Andria</td>
+                                <td>21 400 km</td>
+                                <td><span class="dashboard-status dashboard-status-available">Disponible</span></td>
+                                <td>
+                                    <div class="vehicle-actions">
+                                        <a href="#details-tucson" aria-label="Détails Hyundai Tucson" title="Détails">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                        <a href="#modifier-tucson" aria-label="Modifier Hyundai Tucson" title="Modifier">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                        <button type="button" class="vehicle-delete" aria-label="Supprimer Hyundai Tucson" title="Supprimer">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr data-status="Disponible" data-category="Berline">
+                                <td>
+                                    <div class="dashboard-vehicle-name">
+                                        <span class="dashboard-vehicle-icon">
+                                            <i class="fa-solid fa-car-side"></i>
+                                        </span>
+                                        <div>
+                                            <strong>Toyota Corolla</strong>
+                                            <span>Berline · 2023</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>3145 TBE</td>
+                                <td>Hery Randria</td>
+                                <td>18 600 km</td>
+                                <td><span class="dashboard-status dashboard-status-available">Disponible</span></td>
+                                <td>
+                                    <div class="vehicle-actions">
+                                        <a href="#details-corolla" aria-label="Détails Toyota Corolla" title="Détails">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                        <a href="#modifier-corolla" aria-label="Modifier Toyota Corolla" title="Modifier">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                        <button type="button" class="vehicle-delete" aria-label="Supprimer Toyota Corolla" title="Supprimer">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr data-status="En mission" data-category="Utilitaire">
+                                <td>
+                                    <div class="dashboard-vehicle-name">
+                                        <span class="dashboard-vehicle-icon">
+                                            <i class="fa-solid fa-truck"></i>
+                                        </span>
+                                        <div>
+                                            <strong>Isuzu N-Series</strong>
+                                            <span>Utilitaire · 2020</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>9056 TBF</td>
+                                <td>Michel Rabe</td>
+                                <td>86 300 km</td>
+                                <td><span class="dashboard-status dashboard-status-used">En mission</span></td>
+                                <td>
+                                    <div class="vehicle-actions">
+                                        <a href="#details-isuzu" aria-label="Détails Isuzu N-Series" title="Détails">
+                                            <i class="fa-solid fa-eye"></i>
+                                        </a>
+                                        <a href="#modifier-isuzu" aria-label="Modifier Isuzu N-Series" title="Modifier">
+                                            <i class="fa-solid fa-pen"></i>
+                                        </a>
+                                        <button type="button" class="vehicle-delete" aria-label="Supprimer Isuzu N-Series" title="Supprimer">
+                                            <i class="fa-solid fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr id="vehicle-empty" hidden>
+                                <td colspan="6" class="vehicle-empty">
+                                    <i class="fa-solid fa-car-side"></i>
+                                    <strong>Aucun véhicule trouvé</strong>
+                                    <span>Essayez de modifier votre recherche ou vos filtres.</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <p class="dashboard-demo-note">
+                    Les véhicules et les statistiques affichés sont des exemples statiques.
+                </p>
+            </section>
+
+            <footer class="dashboard-footer">
+                <span>© {{ "now"|date("Y") }} FleetManager. Tous droits réservés.</span>
+                <span>Gestion intelligente de votre flotte automobile.</span>
+            </footer>
+
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const search = document.getElementById('vehicle-search');
+            const status = document.getElementById('vehicle-status');
+            const category = document.getElementById('vehicle-category');
+            const rows = [...document.querySelectorAll('#vehicle-table-body tr[data-status]')];
+            const empty = document.getElementById('vehicle-empty');
+            const count = document.getElementById('vehicle-count');
+
+            function filterVehicles() {
+                const query = search.value.trim().toLocaleLowerCase();
+                let visible = 0;
+
+                rows.forEach(row => {
+                    const matchesText = row.textContent.toLocaleLowerCase().includes(query);
+                    const matchesStatus = !status.value || row.dataset.status === status.value;
+                    const matchesCategory = !category.value || row.dataset.category === category.value;
+                    const show = matchesText && matchesStatus && matchesCategory;
+
+                    row.hidden = !show;
+
+                    if (show) visible++;
+                });
+
+                empty.hidden = visible !== 0;
+                count.textContent = `${visible} véhicule${visible > 1 ? 's' : ''}`;
+            }
+
+            search.addEventListener('input', filterVehicles);
+            status.addEventListener('change', filterVehicles);
+            category.addEventListener('change', filterVehicles);
+
+            document.querySelectorAll('.vehicle-delete').forEach(button => {
+                button.addEventListener('click', () => {
+                    const row = button.closest('tr');
+                    const name = row.querySelector('.dashboard-vehicle-name strong').textContent;
+
+                    if (confirm(`Voulez-vous vraiment supprimer le véhicule ${name} de cette liste de démonstration ?`)) {
+                        row.remove();
+
+                        const remainingRows = [...document.querySelectorAll('#vehicle-table-body tr[data-status]')];
+                        rows.splice(0, rows.length, ...remainingRows);
+                        filterVehicles();
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}

@@ -4,86 +4,10 @@
 {% block title %}Tableau de bord - FleetManager{% endblock %}
 
 {% block body %}
+
 <div class="dashboard-page">
-    <aside class="dashboard-sidebar">
-        <a href="{{ path('home') }}" class="dashboard-brand">
-            <span class="dashboard-brand-icon">
-                <i class="fa-solid fa-car-side"></i>
-            </span>
-            <span>Fleet<span class="dashboard-brand-accent">Manager</span></span>
-        </a>
 
-        <div class="dashboard-profile">
-            <div class="dashboard-avatar">
-                <i class="fa-solid fa-user"></i>
-            </div>
-            <div class="dashboard-profile-info">
-                <strong>{{ app.user ? app.user.firstName : 'Administrateur' }}</strong>
-                <span>Gestionnaire de flotte</span>
-            </div>
-        </div>
-
-        <nav class="dashboard-nav">
-            <span class="dashboard-nav-label">MENU PRINCIPAL</span>
-
-            <a href="#overview" class="dashboard-nav-link active">
-                <i class="fa-solid fa-chart-pie"></i>
-                <span>Tableau de bord</span>
-            </a>
-
-            <a href="#vehicles" class="dashboard-nav-link">
-                <i class="fa-solid fa-car"></i>
-                <span>Véhicules</span>
-                <span class="dashboard-nav-count">24</span>
-            </a>
-
-            <a href="#drivers" class="dashboard-nav-link">
-                <i class="fa-solid fa-users"></i>
-                <span>Conducteurs</span>
-            </a>
-
-            <a href="#maintenance" class="dashboard-nav-link">
-                <i class="fa-solid fa-screwdriver-wrench"></i>
-                <span>Entretiens</span>
-                <span class="dashboard-nav-badge">3</span>
-            </a>
-
-            <a href="#expenses" class="dashboard-nav-link">
-                <i class="fa-solid fa-wallet"></i>
-                <span>Dépenses</span>
-            </a>
-
-            <a href="#reports" class="dashboard-nav-link">
-                <i class="fa-solid fa-chart-column"></i>
-                <span>Rapports</span>
-            </a>
-
-            <span class="dashboard-nav-label dashboard-nav-label-spaced">PRÉFÉRENCES</span>
-
-            <a href="#settings" class="dashboard-nav-link">
-                <i class="fa-solid fa-gear"></i>
-                <span>Paramètres</span>
-            </a>
-        </nav>
-
-        <div class="dashboard-sidebar-bottom">
-            <div class="dashboard-help">
-                <div class="dashboard-help-icon">
-                    <i class="fa-solid fa-headset"></i>
-                </div>
-                <strong>Besoin d'aide ?</strong>
-                <p>Notre équipe est là pour vous accompagner.</p>
-                <a href="mailto:support@fleetmanager.com">Contacter le support</a>
-            </div>
-
-            {% if app.user %}
-                <a href="{{ path('app_logout') }}" class="dashboard-logout">
-                    <i class="fa-solid fa-right-from-bracket"></i>
-                    Déconnexion
-                </a>
-            {% endif %}
-        </div>
-    </aside>
+    {% include "partials/_aside.html.twig" %}
 
     <main class="dashboard-main" id="overview">
         <header class="dashboard-header">
@@ -134,7 +58,9 @@
                     </span>
                     <span class="dashboard-stat-caption">Flotte totale</span>
                 </div>
-                <strong class="dashboard-stat-number">24</strong>
+                <strong class="dashboard-stat-number">
+                    24
+                </strong>
                 <div class="dashboard-stat-bottom">
                     <span class="dashboard-stat-neutral">Véhicules enregistrés</span>
                 </div>
@@ -382,5 +308,6 @@
             <span>Gestion intelligente de votre flotte automobile.</span>
         </footer>
     </main>
+
 </div>
 {% endblock %}
