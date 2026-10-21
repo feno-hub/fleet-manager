@@ -5,11 +5,13 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -33,13 +35,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $name_company = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $siret = null;
-
-    #[ORM\Column(length: 255)]
     private ?string $address_company = null;
 
     #[ORM\Column(length: 255)]
     private ?string $sector = null;
+
+    #[ORM\Column(length: 50, unique: true)]
+    private ?string $nif = null;
 
     #[ORM\Column(length: 255)]
     private ?string $poste = null;
@@ -56,11 +58,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\Column(type: Types::DECIMAL, precision: 1, scale: 0)]
-    private ?string $total_car = null;
+    #[ORM\Column(type: 'integer', options: ['default' => 0])]
+    private int $total_car = 0;
 
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column]
+    private bool $isVerified = false;
+
+    #[ORM\Column(length: 255)]
+    private ?string $status = null;
+
 
     public function getId(): ?int
     {
@@ -185,18 +194,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getSiret(): ?string
-    {
-        return $this->siret;
-    }
-
-    public function setSiret(string $siret): static
-    {
-        $this->siret = $siret;
-
-        return $this;
-    }
-
     public function getAddressCompany(): ?string
     {
         return $this->address_company;
@@ -233,12 +230,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getTotalCar(): ?string
+
+
+    public function getTotalCar(): int
     {
         return $this->total_car;
     }
 
-    public function setTotalCar(string $total_car): static
+    public function setTotalCar(int $total_car): static
     {
         $this->total_car = $total_car;
 
@@ -253,6 +252,42 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCreatedAt(\DateTimeImmutable $createdAt): static
     {
         $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): static
+    {
+        $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    public function getNif(): ?string
+    {
+        return $this->nif;
+    }
+
+    public function setNif(string $nif): static
+    {
+        $this->nif = $nif;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): static
+    {
+        $this->status = $status;
 
         return $this;
     }

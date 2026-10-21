@@ -1,0 +1,386 @@
+
+{% extends 'layouts/account.html.twig' %}
+
+{% block title %}Tableau de bord - FleetManager{% endblock %}
+
+{% block body %}
+<div class="dashboard-page">
+    <aside class="dashboard-sidebar">
+        <a href="{{ path('home') }}" class="dashboard-brand">
+            <span class="dashboard-brand-icon">
+                <i class="fa-solid fa-car-side"></i>
+            </span>
+            <span>Fleet<span class="dashboard-brand-accent">Manager</span></span>
+        </a>
+
+        <div class="dashboard-profile">
+            <div class="dashboard-avatar">
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="dashboard-profile-info">
+                <strong>{{ app.user ? app.user.firstName : 'Administrateur' }}</strong>
+                <span>Gestionnaire de flotte</span>
+            </div>
+        </div>
+
+        <nav class="dashboard-nav">
+            <span class="dashboard-nav-label">MENU PRINCIPAL</span>
+
+            <a href="#overview" class="dashboard-nav-link active">
+                <i class="fa-solid fa-chart-pie"></i>
+                <span>Tableau de bord</span>
+            </a>
+
+            <a href="#vehicles" class="dashboard-nav-link">
+                <i class="fa-solid fa-car"></i>
+                <span>Véhicules</span>
+                <span class="dashboard-nav-count">24</span>
+            </a>
+
+            <a href="#drivers" class="dashboard-nav-link">
+                <i class="fa-solid fa-users"></i>
+                <span>Conducteurs</span>
+            </a>
+
+            <a href="#maintenance" class="dashboard-nav-link">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+                <span>Entretiens</span>
+                <span class="dashboard-nav-badge">3</span>
+            </a>
+
+            <a href="#expenses" class="dashboard-nav-link">
+                <i class="fa-solid fa-wallet"></i>
+                <span>Dépenses</span>
+            </a>
+
+            <a href="#reports" class="dashboard-nav-link">
+                <i class="fa-solid fa-chart-column"></i>
+                <span>Rapports</span>
+            </a>
+
+            <span class="dashboard-nav-label dashboard-nav-label-spaced">PRÉFÉRENCES</span>
+
+            <a href="#settings" class="dashboard-nav-link">
+                <i class="fa-solid fa-gear"></i>
+                <span>Paramètres</span>
+            </a>
+        </nav>
+
+        <div class="dashboard-sidebar-bottom">
+            <div class="dashboard-help">
+                <div class="dashboard-help-icon">
+                    <i class="fa-solid fa-headset"></i>
+                </div>
+                <strong>Besoin d'aide ?</strong>
+                <p>Notre équipe est là pour vous accompagner.</p>
+                <a href="mailto:support@fleetmanager.com">Contacter le support</a>
+            </div>
+
+            {% if app.user %}
+                <a href="{{ path('app_logout') }}" class="dashboard-logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    Déconnexion
+                </a>
+            {% endif %}
+        </div>
+    </aside>
+
+    <main class="dashboard-main" id="overview">
+        <header class="dashboard-header">
+            <div class="dashboard-header-title">
+                <span class="dashboard-eyebrow">ESPACE DE GESTION</span>
+                <h1>Tableau de bord</h1>
+                <p>Voici un aperçu de l'activité de votre flotte automobile.</p>
+            </div>
+
+            <div class="dashboard-header-actions">
+                <button type="button" class="dashboard-icon-button" aria-label="Notifications">
+                    <i class="fa-regular fa-bell"></i>
+                    <span class="dashboard-notification-dot"></span>
+                </button>
+                <div class="dashboard-header-user">
+                    <div class="dashboard-avatar dashboard-avatar-small">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div>
+                        <strong>{{ app.user ? app.user.firstName : 'Administrateur' }}</strong>
+                        <span>Administrateur</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="dashboard-welcome">
+            <div>
+                <span class="dashboard-welcome-label">VOTRE FLOTTE EN UN COUP D'ŒIL</span>
+                <h2>Bienvenue sur FleetManager !</h2>
+                <p>Suivez vos véhicules, maîtrisez vos dépenses et anticipez les entretiens.</p>
+                <a href="#vehicles" class="dashboard-primary-button">
+                    <i class="fa-solid fa-car"></i>
+                    Gérer les véhicules
+                </a>
+            </div>
+            <div class="dashboard-welcome-illustration">
+                <i class="fa-solid fa-car-side"></i>
+                <span class="dashboard-illustration-circle"></span>
+            </div>
+        </section>
+
+        <section class="dashboard-stats">
+            <article class="dashboard-stat-card">
+                <div class="dashboard-stat-top">
+                    <span class="dashboard-stat-icon dashboard-icon-blue">
+                        <i class="fa-solid fa-car"></i>
+                    </span>
+                    <span class="dashboard-stat-caption">Flotte totale</span>
+                </div>
+                <strong class="dashboard-stat-number">24</strong>
+                <div class="dashboard-stat-bottom">
+                    <span class="dashboard-stat-neutral">Véhicules enregistrés</span>
+                </div>
+            </article>
+
+            <article class="dashboard-stat-card">
+                <div class="dashboard-stat-top">
+                    <span class="dashboard-stat-icon dashboard-icon-green">
+                        <i class="fa-solid fa-circle-check"></i>
+                    </span>
+                    <span class="dashboard-stat-caption">Disponibles</span>
+                </div>
+                <strong class="dashboard-stat-number">18</strong>
+                <div class="dashboard-stat-bottom">
+                    <span class="dashboard-stat-positive">
+                        <i class="fa-solid fa-arrow-up"></i> 75 %
+                    </span>
+                    <span class="dashboard-stat-neutral">de la flotte</span>
+                </div>
+            </article>
+
+            <article class="dashboard-stat-card">
+                <div class="dashboard-stat-top">
+                    <span class="dashboard-stat-icon dashboard-icon-orange">
+                        <i class="fa-solid fa-screwdriver-wrench"></i>
+                    </span>
+                    <span class="dashboard-stat-caption">En entretien</span>
+                </div>
+                <strong class="dashboard-stat-number">3</strong>
+                <div class="dashboard-stat-bottom">
+                    <span class="dashboard-stat-warning">À surveiller</span>
+                </div>
+            </article>
+
+            <article class="dashboard-stat-card">
+                <div class="dashboard-stat-top">
+                    <span class="dashboard-stat-icon dashboard-icon-purple">
+                        <i class="fa-solid fa-users"></i>
+                    </span>
+                    <span class="dashboard-stat-caption">Conducteurs</span>
+                </div>
+                <strong class="dashboard-stat-number">20</strong>
+                <div class="dashboard-stat-bottom">
+                    <span class="dashboard-stat-neutral">Conducteurs enregistrés</span>
+                </div>
+            </article>
+        </section>
+
+        <section class="dashboard-content-grid">
+            <article class="dashboard-panel dashboard-expenses-panel" id="expenses">
+                <div class="dashboard-panel-header">
+                    <div>
+                        <h3>Vue d'ensemble des dépenses</h3>
+                        <p>Suivi financier de votre flotte</p>
+                    </div>
+                    <select class="dashboard-select" aria-label="Période des dépenses">
+                        <option>Cette année</option>
+                        <option>Ce mois</option>
+                        <option>Cette semaine</option>
+                    </select>
+                </div>
+
+                <div class="dashboard-expenses-total">
+                    <strong>12 450 000 Ar</strong>
+                    <span><i class="fa-solid fa-arrow-trend-up"></i> Dépenses estimées</span>
+                </div>
+
+                <div class="dashboard-chart" aria-label="Graphique illustratif des dépenses mensuelles">
+                    <div class="dashboard-chart-y">
+                        <span>4M</span>
+                        <span>3M</span>
+                        <span>2M</span>
+                        <span>1M</span>
+                        <span>0</span>
+                    </div>
+                    <div class="dashboard-chart-area">
+                        <div class="dashboard-chart-grid">
+                            <span></span><span></span><span></span><span></span><span></span>
+                        </div>
+                        <div class="dashboard-chart-bars">
+                            <div class="dashboard-chart-column">
+                                <span class="dashboard-chart-bar" style="--bar-height: 42%"></span>
+                                <span class="dashboard-chart-month">Jan</span>
+                            </div>
+                            <div class="dashboard-chart-column">
+                                <span class="dashboard-chart-bar" style="--bar-height: 65%"></span>
+                                <span class="dashboard-chart-month">Fév</span>
+                            </div>
+                            <div class="dashboard-chart-column">
+                                <span class="dashboard-chart-bar" style="--bar-height: 52%"></span>
+                                <span class="dashboard-chart-month">Mar</span>
+                            </div>
+                            <div class="dashboard-chart-column">
+                                <span class="dashboard-chart-bar" style="--bar-height: 78%"></span>
+                                <span class="dashboard-chart-month">Avr</span>
+                            </div>
+                            <div class="dashboard-chart-column">
+                                <span class="dashboard-chart-bar" style="--bar-height: 60%"></span>
+                                <span class="dashboard-chart-month">Mai</span>
+                            </div>
+                            <div class="dashboard-chart-column">
+                                <span class="dashboard-chart-bar" style="--bar-height: 88%"></span>
+                                <span class="dashboard-chart-month">Juin</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <p class="dashboard-demo-note">Graphique de démonstration — données statiques.</p>
+            </article>
+
+            <article class="dashboard-panel dashboard-maintenance-panel" id="maintenance">
+                <div class="dashboard-panel-header">
+                    <div>
+                        <h3>Entretiens à venir</h3>
+                        <p>Planifiez vos prochaines interventions</p>
+                    </div>
+                    <a href="#maintenance-list" class="dashboard-text-link">Tout voir</a>
+                </div>
+
+                <div class="dashboard-maintenance-list" id="maintenance-list">
+                    <div class="dashboard-maintenance-item">
+                        <span class="dashboard-maintenance-icon">
+                            <i class="fa-solid fa-oil-can"></i>
+                        </span>
+                        <div class="dashboard-maintenance-info">
+                            <strong>Vidange moteur</strong>
+                            <span>Toyota Hilux · 1023 TBA</span>
+                            <small><i class="fa-regular fa-calendar"></i> 22 octobre 2026</small>
+                        </div>
+                        <span class="dashboard-status dashboard-status-pending">À venir</span>
+                    </div>
+
+                    <div class="dashboard-maintenance-item">
+                        <span class="dashboard-maintenance-icon">
+                            <i class="fa-solid fa-car-battery"></i>
+                        </span>
+                        <div class="dashboard-maintenance-info">
+                            <strong>Contrôle batterie</strong>
+                            <span>Renault Duster · 4587 TBC</span>
+                            <small><i class="fa-regular fa-calendar"></i> 24 octobre 2026</small>
+                        </div>
+                        <span class="dashboard-status dashboard-status-planned">Planifié</span>
+                    </div>
+
+                    <div class="dashboard-maintenance-item">
+                        <span class="dashboard-maintenance-icon">
+                            <i class="fa-solid fa-gears"></i>
+                        </span>
+                        <div class="dashboard-maintenance-info">
+                            <strong>Révision générale</strong>
+                            <span>Peugeot Partner · 6721 TBA</span>
+                            <small><i class="fa-regular fa-calendar"></i> 27 octobre 2026</small>
+                        </div>
+                        <span class="dashboard-status dashboard-status-pending">À venir</span>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section class="dashboard-panel dashboard-vehicles-panel" id="vehicles">
+            <div class="dashboard-panel-header">
+                <div>
+                    <h3>Véhicules récents</h3>
+                    <p>Consultez rapidement l'état de votre parc automobile.</p>
+                </div>
+                <a href="#vehicles" class="dashboard-outline-button">
+                    <i class="fa-solid fa-plus"></i>
+                    Ajouter un véhicule
+                </a>
+            </div>
+
+            <div class="dashboard-table-wrapper">
+                <table class="dashboard-table">
+                    <thead>
+                        <tr>
+                            <th>Véhicule</th>
+                            <th>Immatriculation</th>
+                            <th>Conducteur</th>
+                            <th>Kilométrage</th>
+                            <th>Statut</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="dashboard-vehicle-name">
+                                    <span class="dashboard-vehicle-icon"><i class="fa-solid fa-truck-pickup"></i></span>
+                                    <div><strong>Toyota Hilux</strong><span>Pickup</span></div>
+                                </div>
+                            </td>
+                            <td>1023 TBA</td>
+                            <td>Jean Rakoto</td>
+                            <td>45 200 km</td>
+                            <td><span class="dashboard-status dashboard-status-available">Disponible</span></td>
+                            <td><a href="#vehicles" class="dashboard-action-link" aria-label="Voir Toyota Hilux"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="dashboard-vehicle-name">
+                                    <span class="dashboard-vehicle-icon"><i class="fa-solid fa-car-side"></i></span>
+                                    <div><strong>Renault Duster</strong><span>SUV</span></div>
+                                </div>
+                            </td>
+                            <td>4587 TBC</td>
+                            <td>Marie Rasoanaivo</td>
+                            <td>32 800 km</td>
+                            <td><span class="dashboard-status dashboard-status-used">En mission</span></td>
+                            <td><a href="#vehicles" class="dashboard-action-link" aria-label="Voir Renault Duster"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="dashboard-vehicle-name">
+                                    <span class="dashboard-vehicle-icon"><i class="fa-solid fa-van-shuttle"></i></span>
+                                    <div><strong>Peugeot Partner</strong><span>Utilitaire</span></div>
+                                </div>
+                            </td>
+                            <td>6721 TBA</td>
+                            <td>Non assigné</td>
+                            <td>68 150 km</td>
+                            <td><span class="dashboard-status dashboard-status-maintenance">En entretien</span></td>
+                            <td><a href="#vehicles" class="dashboard-action-link" aria-label="Voir Peugeot Partner"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="dashboard-vehicle-name">
+                                    <span class="dashboard-vehicle-icon"><i class="fa-solid fa-car"></i></span>
+                                    <div><strong>Hyundai Tucson</strong><span>SUV</span></div>
+                                </div>
+                            </td>
+                            <td>8214 TBC</td>
+                            <td>Paul Andria</td>
+                            <td>21 400 km</td>
+                            <td><span class="dashboard-status dashboard-status-available">Disponible</span></td>
+                            <td><a href="#vehicles" class="dashboard-action-link" aria-label="Voir Hyundai Tucson"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="dashboard-demo-note">Les chiffres et les véhicules affichés sont des exemples. Ils ne proviennent pas encore de la base de données.</p>
+        </section>
+
+        <footer class="dashboard-footer">
+            <span>© {{ "now"|date("Y") }} FleetManager. Tous droits réservés.</span>
+            <span>Gestion intelligente de votre flotte automobile.</span>
+        </footer>
+    </main>
+</div>
+{% endblock %}

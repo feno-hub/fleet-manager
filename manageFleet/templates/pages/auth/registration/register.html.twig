@@ -1,0 +1,246 @@
+
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Créer un compte - FleetManager{% endblock %}
+
+{% block body %}
+<div class="register-page">
+    <div class="register-layout">
+
+        <aside class="register-aside">
+            <a href="{{ path('home') }}" class="register-brand">
+                <span class="register-brand-icon">
+                    <i class="fa-solid fa-car-side"></i>
+                </span>
+                <span>Fleet<span class="register-brand-highlight">Manager</span></span>
+            </a>
+
+            <div class="register-aside-content">
+                <span class="register-eyebrow">
+                    <i class="fa-solid fa-chart-line"></i>
+                    Gestion de flotte intelligente
+                </span>
+
+                <h1>Prenez le contrôle de votre flotte automobile.</h1>
+
+                <p>
+                    Centralisez vos véhicules, suivez vos dépenses
+                    et simplifiez la gestion quotidienne de votre entreprise.
+                </p>
+
+                <div class="register-benefits">
+                    <div class="register-benefit">
+                        <span class="register-benefit-icon">
+                            <i class="fa-solid fa-car"></i>
+                        </span>
+                        <div>
+                            <h3>Vos véhicules au même endroit</h3>
+                            <p>Retrouvez les informations de votre parc automobile.</p>
+                        </div>
+                    </div>
+
+                    <div class="register-benefit">
+                        <span class="register-benefit-icon">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </span>
+                        <div>
+                            <h3>Un entretien mieux organisé</h3>
+                            <p>Suivez les opérations et les échéances importantes.</p>
+                        </div>
+                    </div>
+
+                    <div class="register-benefit">
+                        <span class="register-benefit-icon">
+                            <i class="fa-solid fa-chart-pie"></i>
+                        </span>
+                        <div>
+                            <h3>Une meilleure visibilité</h3>
+                            <p>Préparez le suivi de vos coûts et de vos activités.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="register-aside-footer">
+                <i class="fa-solid fa-shield-halved"></i>
+                Une gestion organisée, un compte sécurisé.
+            </div>
+        </aside>
+
+        <main class="register-main">
+            <div class="register-form-container">
+
+                <div class="register-mobile-brand">
+                    <span class="register-brand-icon">
+                        <i class="fa-solid fa-car-side"></i>
+                    </span>
+                    Fleet<span class="register-brand-highlight">Manager</span>
+                </div>
+
+                <div class="register-heading">
+                    <span class="register-step">CRÉATION DE COMPTE</span>
+                    <h2>Créez votre espace</h2>
+                    <p>Renseignez les informations de votre entreprise pour commencer.</p>
+                </div>
+
+                {% for flash_error in app.flashes('verify_email_error') %}
+                    <div class="register-alert" role="alert">
+                        {{ flash_error }}
+                    </div>
+                {% endfor %}
+
+                {% for flash_error in app.flashes('error') %}
+                    <div class="register-alert" role="alert">
+                        {{ flash_error }}
+                    </div>
+                {% endfor %}
+
+                {% for flash_success in app.flashes('success') %}
+                    <div class="register-success" role="status">
+                        {{ flash_success }}
+                    </div>
+                {% endfor %}
+
+                {% if not registrationForm.vars.valid %}
+                    <div class="register-alert" role="alert">
+                        <strong>Vérifiez les informations saisies.</strong>
+                        Certains champs contiennent des erreurs.
+                    </div>
+                {% endif %}
+
+                {{ form_errors(registrationForm) }}
+
+
+                {{ form_start(registrationForm, {
+                    attr: { class: 'register-form' }
+                }) }}
+
+                    <section class="register-section">
+                        <div class="register-section-heading">
+                            <span class="register-section-number">01</span>
+                            <div>
+                                <h3>Informations personnelles</h3>
+                                <p>Comment pouvons-nous vous contacter ?</p>
+                            </div>
+                        </div>
+
+                        <div class="register-fields">
+                            <div class="register-field">
+                                {{ form_label(registrationForm.first_name, 'Prénom') }}
+                                {{ form_widget(registrationForm.first_name) }}
+                                {{ form_errors(registrationForm.first_name) }}
+                            </div>
+
+                            <div class="register-field">
+                                {{ form_label(registrationForm.last_name, 'Nom') }}
+                                {{ form_widget(registrationForm.last_name) }}
+                                {{ form_errors(registrationForm.last_name) }}
+                            </div>
+
+                            <div class="register-field">
+                                {{ form_label(registrationForm.email, 'Adresse e-mail') }}
+                                {{ form_widget(registrationForm.email) }}
+                                {{ form_errors(registrationForm.email) }}
+                            </div>
+
+                            <div class="register-field">
+                                {{ form_label(registrationForm.phone, 'Téléphone') }}
+                                {{ form_widget(registrationForm.phone) }}
+                                {{ form_errors(registrationForm.phone) }}
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="register-section">
+                        <div class="register-section-heading">
+                            <span class="register-section-number">02</span>
+                            <div>
+                                <h3>Votre entreprise</h3>
+                                <p>Présentez-nous votre activité.</p>
+                            </div>
+                        </div>
+
+                        <div class="register-fields">
+                            <div class="register-field register-field-full">
+                                {{ form_label(registrationForm.name_company, "Nom de l'entreprise") }}
+                                {{ form_widget(registrationForm.name_company) }}
+                                {{ form_errors(registrationForm.name_company) }}
+                            </div>
+
+                            <div class="register-field">
+                                {{ form_label(registrationForm.nif, 'NIF') }}
+                                {{ form_widget(registrationForm.nif) }}
+                                {{ form_errors(registrationForm.nif) }}
+                            </div>
+
+                            <div class="register-field">
+                                {{ form_label(registrationForm.sector, "Secteur d'activité") }}
+                                {{ form_widget(registrationForm.sector) }}
+                                {{ form_errors(registrationForm.sector) }}
+                            </div>
+
+                            <div class="register-field register-field-full">
+                                {{ form_label(registrationForm.address_company, "Adresse de l'entreprise") }}
+                                {{ form_widget(registrationForm.address_company) }}
+                                {{ form_errors(registrationForm.address_company) }}
+                            </div>
+
+                            <div class="register-field">
+                                {{ form_label(registrationForm.poste, 'Votre poste') }}
+                                {{ form_widget(registrationForm.poste) }}
+                                {{ form_errors(registrationForm.poste) }}
+                            </div>
+
+                            <div class="register-field">
+                                {{ form_label(registrationForm.total_car, 'Nombre de véhicules') }}
+                                {{ form_widget(registrationForm.total_car) }}
+                                {{ form_errors(registrationForm.total_car) }}
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="register-section">
+                        <div class="register-section-heading">
+                            <span class="register-section-number">03</span>
+                            <div>
+                                <h3>Sécurisez votre compte</h3>
+                                <p>Choisissez un mot de passe personnel.</p>
+                            </div>
+                        </div>
+
+                        <div class="register-fields">
+                            <div class="register-field register-field-full">
+                                {{ form_label(registrationForm.plainPassword, 'Mot de passe') }}
+                                {{ form_widget(registrationForm.plainPassword) }}
+                                {{ form_errors(registrationForm.plainPassword) }}
+                            </div>
+
+                            <div class="register-field register-field-full register-terms">
+                                {{ form_widget(registrationForm.agreeTerms) }}
+                                {{ form_label(registrationForm.agreeTerms, "J'accepte les conditions d'utilisation.") }}
+                                {{ form_errors(registrationForm.agreeTerms) }}
+                            </div>
+                        </div>
+                    </section>
+
+                    <button type="submit" class="register-submit">
+                        Créer mon compte
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+
+                {{ form_end(registrationForm) }}
+
+                <p class="register-login">
+                    Vous avez déjà un compte ?
+                    <a href="{{ path('app_login') }}">Se connecter</a>
+                </p>
+
+                <p class="register-security">
+                    <i class="fa-solid fa-lock"></i>
+                    Vos informations sont utilisées pour créer votre espace.
+                </p>
+            </div>
+        </main>
+    </div>
+</div>
+{% endblock %}

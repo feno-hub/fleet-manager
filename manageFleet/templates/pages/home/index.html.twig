@@ -12,10 +12,18 @@
 
         <div class="home-header-overlay"></div>
 
-       
-
         <section class="home-hero" id="accueil">
             <div class="home-hero-content">
+
+            {% for message in app.flashes('success') %}
+                <div class="home-alert home-alert-success" role="status">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <div>
+                        <strong>Inscription réussie !</strong>
+                        <p>{{ message }}</p>
+                    </div>
+                </div>
+            {% endfor %}
 
                 <span class="home-hero-badge">
                     <i class="fa-solid fa-location-dot"></i>
@@ -39,7 +47,7 @@
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
 
-                    <a href="#fonctionnalites" class="home-btn home-btn-outline">
+                    <a href="{{ path('fonctionality') }}" class="home-btn home-btn-outline">
                         <i class="fa-solid fa-circle-play"></i>
                         Explorer les fonctionnalités
                     </a>
@@ -309,14 +317,5 @@
         </section>
 
     </main>
-
-    <footer class="home-footer">
-        <a href="#" class="home-logo">
-            <i class="fa-solid fa-truck-fast"></i>
-            <span>Fleet<span class="home-logo-highlight">Manager</span></span>
-        </a>
-        <p>© 2026 FleetManager. Tous droits réservés.</p>
-        <a href="#accueil">Retour en haut <i class="fa-solid fa-arrow-up"></i></a>
-    </footer>
 
 {% endblock %}

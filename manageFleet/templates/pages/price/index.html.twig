@@ -1,0 +1,393 @@
+
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Tarifs et abonnements - FleetManager{% endblock %}
+
+{% block body %}
+    <div class="pricing-page">
+
+        <section class="pricing-hero">
+            <div class="pricing-hero-content">
+                <span class="pricing-eyebrow">
+                    <i class="fa-solid fa-tags"></i>
+                    NOS ABONNEMENTS
+                </span>
+
+                <h1>
+                    Le bon abonnement pour
+                    <span>votre flotte automobile.</span>
+                </h1>
+
+                <p>
+                    Choisissez une formule adaptée à la taille de votre
+                    entreprise et profitez d'une gestion plus simple,
+                    plus organisée et plus efficace de vos véhicules.
+                </p>
+
+                <div class="pricing-hero-points">
+                    <span>
+                        <i class="fa-solid fa-circle-check"></i>
+                        Des formules adaptées à vos besoins
+                    </span>
+                    <span>
+                        <i class="fa-solid fa-circle-check"></i>
+                        Une gestion centralisée
+                    </span>
+                    <span>
+                        <i class="fa-solid fa-circle-check"></i>
+                        Une offre évolutive
+                    </span>
+                </div>
+            </div>
+
+            <div class="pricing-hero-visual">
+                <div class="pricing-visual-circle"></div>
+
+                <div class="pricing-visual-card">
+                    <span class="pricing-visual-icon">
+                        <i class="fa-solid fa-car-side"></i>
+                    </span>
+
+                    <span class="pricing-visual-label">
+                        FLEETMANAGER
+                    </span>
+
+                    <h3>Votre flotte, votre contrôle.</h3>
+
+                    <p>
+                        Les outils essentiels pour organiser votre parc
+                        automobile depuis un seul espace.
+                    </p>
+
+                    <div class="pricing-visual-divider"></div>
+
+                    <div class="pricing-visual-feature">
+                        <i class="fa-solid fa-check"></i>
+                        Suivi des véhicules
+                    </div>
+
+                    <div class="pricing-visual-feature">
+                        <i class="fa-solid fa-check"></i>
+                        Suivi des entretiens
+                    </div>
+
+                    <div class="pricing-visual-feature">
+                        <i class="fa-solid fa-check"></i>
+                        Gestion des dépenses
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pricing-plans">
+            <div class="pricing-section-heading">
+                <span class="pricing-eyebrow">NOS FORMULES</span>
+                <h2>Choisissez votre abonnement</h2>
+                <p>
+                    Commencez avec les fonctionnalités essentielles
+                    et évoluez vers une formule plus complète selon
+                    les besoins de votre entreprise.
+                </p>
+            </div>
+
+            <div class="pricing-grid">
+
+                <article class="pricing-card">
+                    <div class="pricing-card-top">
+                        <span class="pricing-plan-icon pricing-plan-icon-starter">
+                            <i class="fa-solid fa-car"></i>
+                        </span>
+
+                        <h3>Starter</h3>
+
+                        <p class="pricing-plan-description">
+                            Pour les petites entreprises qui souhaitent
+                            organiser leur flotte.
+                        </p>
+
+                        <div class="pricing-price">
+                            <span class="pricing-currency">Ar</span>
+                            <strong>29 000</strong>
+                            <span class="pricing-period">/ mois</span>
+                        </div>
+
+                        <p class="pricing-price-note">
+                            Facturation mensuelle
+                        </p>
+
+                        <a href="{{ path('app_register') }}" class="pricing-btn pricing-btn-outline">
+                            Choisir Starter
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="pricing-card-divider"></div>
+
+                    <div class="pricing-features">
+                        <h4>Fonctionnalités incluses</h4>
+
+                        <ul>
+                            <li>
+                                <i class="fa-solid fa-check"></i>
+                                Jusqu'à 10 véhicules
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check"></i>
+                                Fiches détaillées des véhicules
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check"></i>
+                                Suivi des entretiens
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check"></i>
+                                Historique des opérations
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check"></i>
+                                Tableau de bord essentiel
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="pricing-card pricing-card-popular">
+                    <div class="pricing-popular-label">
+                        <i class="fa-solid fa-star"></i>
+                        LE PLUS POPULAIRE
+                    </div>
+
+                    <div class="pricing-card-top">
+                        <span class="pricing-plan-icon pricing-plan-icon-business">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </span>
+
+                        <h3>Business</h3>
+
+                        <p class="pricing-plan-description">
+                            Pour les entreprises qui souhaitent optimiser
+                            le suivi de leurs véhicules.
+                        </p>
+
+                        <div class="pricing-price">
+                            <span class="pricing-currency">Ar</span>
+                            <strong>79 000</strong>
+                            <span class="pricing-period">/ mois</span>
+                        </div>
+
+                        <p class="pricing-price-note">
+                            Facturation mensuelle
+                        </p>
+
+                        <a href="{{ path('app_register') }}" class="pricing-btn pricing-btn-filled">
+                            Choisir Business
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="pricing-card-divider"></div>
+
+                    <div class="pricing-features">
+                        <h4>Tout Starter, plus :</h4>
+
+                        <ul>
+                            <li>
+                                <i class="fa-solid fa-check"></i>
+                                Jusqu'à 50 véhicules
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check"></i>
+                                Suivi détaillé des dépenses
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check"></i>
+                                Planification de la maintenance
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check"></i>
+                                Rapports de gestion
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check"></i>
+                                Gestion des documents
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check"></i>
+                                Assistance prioritaire
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="pricing-card">
+                    <div class="pricing-card-top">
+                        <span class="pricing-plan-icon pricing-plan-icon-enterprise">
+                            <i class="fa-solid fa-building"></i>
+                        </span>
+
+                        <h3>Enterprise</h3>
+
+                        <p class="pricing-plan-description">
+                            Pour les grandes flottes nécessitant une
+                            gestion plus complète.
+                        </p>
+
+                        <div class="pricing-price">
+                            <span class="pricing-currency">Ar</span>
+                            <strong>199 000</strong>
+                            <span class="pricing-period">/ mois</span>
+                        </div>
+
+                        <p class="pricing-price-note">
+                            Facturation mensuelle
+                        </p>
+
+                        <a href="{{ path('app_register') }}" class="pricing-btn pricing-btn-outline">
+                            Choisir Enterprise
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    </div>
+
+                    <div class="pricing-card-divider"></div>
+
+                    <div class="pricing-features">
+                        <h4>Tout Business, plus :</h4>
+
+                        <ul>
+                            <li>
+                                <i class="fa-solid fa-check"></i>
+                                Jusqu'à 200 véhicules
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check"></i>
+                                Rapports avancés
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check"></i>
+                                Gestion multi-sites
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check"></i>
+                                Gestion des accès utilisateurs
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check"></i>
+                                Accompagnement personnalisé
+                            </li>
+                            <li>
+                                <i class="fa-solid fa-check"></i>
+                                Support dédié
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+
+            </div>
+
+            <p class="pricing-disclaimer">
+                Les tarifs et limites présentés sont des exemples à adapter
+                à votre offre commerciale définitive.
+            </p>
+        </section>
+
+        <section class="pricing-advantages">
+            <div class="pricing-advantages-heading">
+                <span class="pricing-eyebrow">POURQUOI NOUS CHOISIR ?</span>
+                <h2>Un abonnement pensé pour votre activité</h2>
+            </div>
+
+            <div class="pricing-advantages-grid">
+                <article class="pricing-advantage">
+                    <span><i class="fa-solid fa-sliders"></i></span>
+                    <h3>Une formule adaptée</h3>
+                    <p>
+                        Choisissez les fonctionnalités et la capacité
+                        correspondant à votre organisation.
+                    </p>
+                </article>
+
+                <article class="pricing-advantage">
+                    <span><i class="fa-solid fa-chart-pie"></i></span>
+                    <h3>Une meilleure visibilité</h3>
+                    <p>
+                        Organisez les informations relatives aux véhicules,
+                        à la maintenance et aux dépenses.
+                    </p>
+                </article>
+
+                <article class="pricing-advantage">
+                    <span><i class="fa-solid fa-arrow-up-right-dots"></i></span>
+                    <h3>Une solution évolutive</h3>
+                    <p>
+                        Passez à une formule supérieure lorsque les besoins
+                        de votre flotte augmentent.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section class="pricing-faq">
+            <div class="pricing-section-heading">
+                <span class="pricing-eyebrow">QUESTIONS FRÉQUENTES</span>
+                <h2>Vous avez des questions ?</h2>
+            </div>
+
+            <div class="pricing-faq-list">
+                <details class="pricing-faq-item">
+                    <summary>Comment choisir mon abonnement ?</summary>
+                    <p>
+                        Choisissez votre formule selon le nombre de véhicules
+                        à gérer et les fonctionnalités dont votre entreprise
+                        a besoin.
+                    </p>
+                </details>
+
+                <details class="pricing-faq-item">
+                    <summary>Puis-je changer de formule plus tard ?</summary>
+                    <p>
+                        Vous pouvez prévoir une évolution vers une autre formule.
+                        Les conditions exactes dépendront des règles
+                        d'abonnement mises en place sur votre plateforme.
+                    </p>
+                </details>
+
+                <details class="pricing-faq-item">
+                    <summary>Comment fonctionne le paiement ?</summary>
+                    <p>
+                        Après avoir choisi une formule et créé votre compte,
+                        vous pourrez accéder au processus de paiement lorsque
+                        cette fonctionnalité sera configurée.
+                    </p>
+                </details>
+
+                <details class="pricing-faq-item">
+                    <summary>Les tarifs affichés sont-ils définitifs ?</summary>
+                    <p>
+                        Non. Les montants affichés sur cette page sont des
+                        exemples de présentation. Les prix définitifs doivent
+                        être configurés selon votre offre commerciale.
+                    </p>
+                </details>
+            </div>
+        </section>
+
+        <section class="pricing-cta">
+            <span class="pricing-cta-icon">
+                <i class="fa-solid fa-car-rear"></i>
+            </span>
+
+            <h2>Prêt à mieux gérer votre flotte ?</h2>
+
+            <p>
+                Choisissez votre formule et préparez votre entreprise
+                à une gestion automobile plus organisée.
+            </p>
+
+            <a href="{{ path('app_register') }}" class="pricing-btn pricing-btn-cta">
+                Créer mon compte
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </section>
+
+    </div>
+{% endblock %}

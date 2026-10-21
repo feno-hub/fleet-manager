@@ -1,0 +1,99 @@
+
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Connexion - FleetManager{% endblock %}
+
+{% block body %}
+<div class="login-page">
+    <div class="login-container">
+
+        <a href="{{ path('home') }}" class="login-logo">
+            <span class="login-logo-icon">
+                <i class="fa-solid fa-car-side"></i>
+            </span>
+            Fleet<span>Manager</span>
+        </a>
+
+        <div class="login-header">
+            <h1>Bon retour !</h1>
+            <p>Connectez-vous pour gérer votre flotte automobile.</p>
+        </div>
+
+        {% if error %}
+            <div class="login-alert" role="alert">
+                <i class="fa-solid fa-circle-exclamation"></i>
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
+        {% endif %}
+
+        {% if app.user %}
+            <div class="login-connected">
+                Vous êtes connecté en tant que
+                <strong>{{ app.user.userIdentifier }}</strong>.
+                <a href="{{ logout_path() }}">Se déconnecter</a>
+            </div>
+        {% endif %}
+
+        <form method="post" class="login-form">
+            <div class="login-field">
+                <label for="username">Adresse e-mail</label>
+                <div class="login-input-wrapper">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input
+                        type="email"
+                        value="{{ last_username }}"
+                        name="_username"
+                        id="username"
+                        placeholder="exemple@entreprise.com"
+                        autocomplete="email"
+                        required
+                        autofocus
+                    >
+                </div>
+            </div>
+
+            <div class="login-field">
+                <label for="password">Mot de passe</label>
+                <div class="login-input-wrapper">
+                    <i class="fa-solid fa-lock"></i>
+                    <input
+                        type="password"
+                        name="_password"
+                        id="password"
+                        placeholder="Entrez votre mot de passe"
+                        autocomplete="current-password"
+                        required
+                    >
+                </div>
+            </div>
+
+            <input
+                type="hidden"
+                name="_csrf_token"
+                data-controller="csrf-protection"
+                value="{{ csrf_token('authenticate') }}"
+            >
+
+            <button class="login-submit" type="submit">
+                Se connecter
+                <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </form>
+
+        <div class="login-divider">
+            <span>Accès sécurisé</span>
+        </div>
+
+        <p class="login-register">
+            Vous n'avez pas encore de compte ?
+            <a href="{{ path('app_register') }}">Créer un compte</a>
+        </p>
+
+        <p class="login-footer">
+            <i class="fa-solid fa-shield-halved"></i>
+            Vos données sont protégées et sécurisées.
+        </p>
+
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,281 @@
+
+{% extends 'layouts/base.html.twig' %}
+
+{% block title %}Nos avantages - FleetManager{% endblock %}
+
+{% block body %}
+    <div class="advantage-page">
+
+        <section class="advantage-hero">
+            <div class="advantage-hero-content">
+                <span class="advantage-eyebrow">
+                    <i class="fa-solid fa-star"></i>
+                    POURQUOI FLEETMANAGER ?
+                </span>
+
+                <h1>
+                    Votre flotte automobile,
+                    <span>plus simple à gérer.</span>
+                </h1>
+
+                <p>
+                    Optimisez vos dépenses, anticipez les entretiens et
+                    améliorez la performance de votre flotte grâce à une
+                    solution pensée pour les entreprises.
+                </p>
+
+                <div class="advantage-hero-actions">
+                    <a href="{{ path('app_register') }}" class="advantage-btn-primary">
+                        Commencer gratuitement
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </a>
+
+                    <a href="{{ path('home') }}" class="advantage-btn-secondary">
+                        Découvrir FleetManager
+                    </a>
+                </div>
+
+                <div class="advantage-hero-note">
+                    <i class="fa-solid fa-circle-check"></i>
+                    Une gestion centralisée et accessible
+                </div>
+            </div>
+
+            <div class="advantage-hero-visual">
+                <div class="advantage-visual-decoration"></div>
+
+                <div class="advantage-dashboard">
+                    <div class="advantage-dashboard-header">
+                        <div>
+                            <span class="advantage-dashboard-label">
+                                VOTRE FLOTTE
+                            </span>
+                            <h3>Vue d'ensemble</h3>
+                        </div>
+
+                        <span class="advantage-dashboard-icon">
+                            <i class="fa-solid fa-car-side"></i>
+                        </span>
+                    </div>
+
+                    <div class="advantage-dashboard-card">
+                        <div class="advantage-dashboard-card-icon">
+                            <i class="fa-solid fa-car"></i>
+                        </div>
+                        <div>
+                            <span>Parc automobile</span>
+                            <strong>Centralisé</strong>
+                        </div>
+                        <i class="fa-solid fa-check advantage-check"></i>
+                    </div>
+
+                    <div class="advantage-dashboard-card">
+                        <div class="advantage-dashboard-card-icon">
+                            <i class="fa-solid fa-screwdriver-wrench"></i>
+                        </div>
+                        <div>
+                            <span>Maintenance</span>
+                            <strong>Mieux anticipée</strong>
+                        </div>
+                        <i class="fa-solid fa-check advantage-check"></i>
+                    </div>
+
+                    <div class="advantage-dashboard-card">
+                        <div class="advantage-dashboard-card-icon">
+                            <i class="fa-solid fa-chart-line"></i>
+                        </div>
+                        <div>
+                            <span>Gestion des coûts</span>
+                            <strong>Plus lisible</strong>
+                        </div>
+                        <i class="fa-solid fa-check advantage-check"></i>
+                    </div>
+
+                    <div class="advantage-dashboard-footer">
+                        <i class="fa-solid fa-shield-halved"></i>
+                        Toutes vos informations au même endroit
+                    </div>
+                </div>
+
+                <div class="advantage-floating-card">
+                    <span class="advantage-floating-icon">
+                        <i class="fa-solid fa-clock"></i>
+                    </span>
+                    <div>
+                        <strong>Un gain de temps</strong>
+                        <span>Moins de tâches dispersées</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="advantage-benefits">
+            <div class="advantage-section-heading">
+                <span class="advantage-eyebrow">LES BÉNÉFICES</span>
+                <h2>Une meilleure gestion à chaque étape</h2>
+                <p>
+                    Les outils essentiels pour simplifier le quotidien
+                    des responsables de flotte et des entreprises.
+                </p>
+            </div>
+
+            <div class="advantage-benefits-grid">
+                <article class="advantage-benefit-card">
+                    <span class="advantage-benefit-icon">
+                        <i class="fa-solid fa-wallet"></i>
+                    </span>
+                    <h3>Maîtrisez vos dépenses</h3>
+                    <p>
+                        Regroupez les dépenses liées aux véhicules pour
+                        mieux comprendre les coûts et identifier les
+                        possibilités d'économie.
+                    </p>
+                    <span class="advantage-card-number">01</span>
+                </article>
+
+                <article class="advantage-benefit-card">
+                    <span class="advantage-benefit-icon">
+                        <i class="fa-solid fa-gears"></i>
+                    </span>
+                    <h3>Anticipez la maintenance</h3>
+                    <p>
+                        Organisez les entretiens, suivez les interventions
+                        et préparez les échéances pour limiter les oublis
+                        et les immobilisations évitables.
+                    </p>
+                    <span class="advantage-card-number">02</span>
+                </article>
+
+                <article class="advantage-benefit-card">
+                    <span class="advantage-benefit-icon">
+                        <i class="fa-solid fa-database"></i>
+                    </span>
+                    <h3>Centralisez les informations</h3>
+                    <p>
+                        Retrouvez les caractéristiques, les documents
+                        et l'historique de vos véhicules depuis un espace
+                        de gestion unique.
+                    </p>
+                    <span class="advantage-card-number">03</span>
+                </article>
+
+                <article class="advantage-benefit-card">
+                    <span class="advantage-benefit-icon">
+                        <i class="fa-solid fa-chart-column"></i>
+                    </span>
+                    <h3>Décidez avec plus de visibilité</h3>
+                    <p>
+                        Consultez les données disponibles sur votre flotte
+                        pour mieux planifier les opérations et orienter
+                        vos décisions.
+                    </p>
+                    <span class="advantage-card-number">04</span>
+                </article>
+
+                <article class="advantage-benefit-card">
+                    <span class="advantage-benefit-icon">
+                        <i class="fa-solid fa-calendar-check"></i>
+                    </span>
+                    <h3>Gagnez du temps</h3>
+                    <p>
+                        Simplifiez le suivi quotidien en regroupant
+                        les informations et les tâches importantes
+                        dans une interface organisée.
+                    </p>
+                    <span class="advantage-card-number">05</span>
+                </article>
+
+                <article class="advantage-benefit-card">
+                    <span class="advantage-benefit-icon">
+                        <i class="fa-solid fa-expand"></i>
+                    </span>
+                    <h3>Accompagnez votre croissance</h3>
+                    <p>
+                        Structurez votre organisation pour faciliter
+                        le suivi de votre parc automobile à mesure
+                        que vos besoins évoluent.
+                    </p>
+                    <span class="advantage-card-number">06</span>
+                </article>
+            </div>
+        </section>
+
+        <section class="advantage-comparison">
+            <div class="advantage-comparison-content">
+                <span class="advantage-eyebrow">
+                    UNE ORGANISATION PLUS EFFICACE
+                </span>
+
+                <h2>Passez d'un suivi dispersé à une gestion centralisée.</h2>
+
+                <p>
+                    Fini les informations éparpillées entre plusieurs
+                    fichiers et documents. Structurez le suivi de votre
+                    flotte dans un environnement conçu pour vous aider
+                    à mieux organiser vos opérations.
+                </p>
+
+                <a href="{{ path('app_register') }}" class="advantage-btn-primary">
+                    Créer mon compte
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="advantage-comparison-list">
+                <div class="advantage-comparison-item advantage-comparison-old">
+                    <span class="advantage-comparison-item-icon">
+                        <i class="fa-solid fa-folder-open"></i>
+                    </span>
+                    <div>
+                        <h3>Un suivi dispersé</h3>
+                        <p>Des données difficiles à retrouver et à comparer.</p>
+                    </div>
+                    <i class="fa-solid fa-minus"></i>
+                </div>
+
+                <div class="advantage-comparison-item advantage-comparison-new">
+                    <span class="advantage-comparison-item-icon">
+                        <i class="fa-solid fa-layer-group"></i>
+                    </span>
+                    <div>
+                        <h3>Un espace centralisé</h3>
+                        <p>Les informations utiles regroupées au même endroit.</p>
+                    </div>
+                    <i class="fa-solid fa-check"></i>
+                </div>
+
+                <div class="advantage-comparison-item advantage-comparison-new">
+                    <span class="advantage-comparison-item-icon">
+                        <i class="fa-solid fa-calendar-days"></i>
+                    </span>
+                    <div>
+                        <h3>Un suivi mieux organisé</h3>
+                        <p>Les opérations et les échéances plus faciles à planifier.</p>
+                    </div>
+                    <i class="fa-solid fa-check"></i>
+                </div>
+            </div>
+        </section>
+
+        <section class="advantage-cta">
+            <div class="advantage-cta-icon">
+                <i class="fa-solid fa-car-rear"></i>
+            </div>
+
+            <span class="advantage-eyebrow">PRÊT À SIMPLIFIER VOTRE GESTION ?</span>
+
+            <h2>Donnez une nouvelle dimension à votre flotte.</h2>
+
+            <p>
+                Créez votre compte FleetManager et découvrez une manière
+                plus structurée de gérer vos véhicules.
+            </p>
+
+            <a href="{{ path('app_register') }}" class="advantage-btn-light">
+                Rejoindre FleetManager
+                <i class="fa-solid fa-arrow-right"></i>
+            </a>
+        </section>
+
+    </div>
+{% endblock %}

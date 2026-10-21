@@ -27,7 +27,52 @@
             {% include "partials/_nav.html.twig" %}
 
         </div>
-
+        
         {% block body %}{% endblock %}
+        <footer class="features-footer">
+            <div class="features-container">
+                <div class="features-footer-grid">
+                    <div class="features-footer-brand">
+                        <a href="index.html" class="features-logo">
+                            <i class="fa-solid fa-car-side"></i>
+                            <span>Fleet<span class="features-logo-accent">Manager</span></span>
+                        </a>
+                        <p>
+                            Une solution conçue pour simplifier la gestion
+                            et améliorer le suivi de votre flotte automobile.
+                        </p>
+                    </div>
+    
+                    <div class="features-footer-column">
+                        <h3>Navigation</h3>
+                        <a href="index.html">Accueil</a>
+                        <a href="fonctionnalites.html">Fonctionnalités</a>
+                        <a href="index.html#avantages">Avantages</a>
+                        <a href="index.html#tarifs">Tarifs</a>
+                    </div>
+    
+                    <div class="features-footer-column">
+                        <h3>Mon compte</h3>
+                        <a href="{{ path('app_login') }}">Se connecter</a>
+                        <a href="register.html">Créer un compte</a>
+                        <a href="index.html#apropos">À propos</a>
+                    </div>
+    
+                    <div class="features-footer-social">
+                        <h3>Suivez-nous</h3>
+                        <div>
+                            <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="features-footer-bottom">
+                    <p>&copy; 2026 FleetManager. Tous droits réservés.</p>
+                    <a href="index.html">Retour à l'accueil</a>
+                </div>
+            </div>
+        </footer>                 
     </body>
 </html>

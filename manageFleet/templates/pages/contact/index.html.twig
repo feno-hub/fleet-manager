@@ -1,20 +1,223 @@
-<!DOCTYPE html>
+{% extends 'layouts/base.html.twig' %}
 
-<title>Hello ContactController!</title>
+{% block title %}FleetManager{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {# <div class="container">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code>E:/fleet-manager/manageFleet/src/Controller/ContactController.php</code></li>
-        <li>Your template at <code>E:/fleet-manager/manageFleet/templates/contact/index.html.twig</code></li>
-    </ul>
-</div>
+        <nav class="home-nav">
+
+            <a href="index.html" class="home-logo">
+                <i class="fa-solid fa-truck-fast"></i>
+                <span>Fleet<span>Manager</span></span>
+            </a>
+
+            <div class="home-nav-links">
+                <a href="index.html">Accueil</a>
+                <a href="index.html#fonctionnalites">Fonctionnalités</a>
+                <a href="index.html#avantages">Avantages</a>
+                <a href="index.html#tarifs">Abonnements</a>
+                <a href="contact.html" class="active">Contact</a>
+            </div>
+
+            <div class="home-nav-actions">
+                <a href="login.html" class="home-login">Connexion</a>
+                <a href="register.html" class="home-register">Créer un compte</a>
+            </div>
+
+        </nav>
+
+    </div> #}
+
+    <main class="contact-container">
+
+        <section class="contact-hero">
+            <a href="index.html" class="contact-logo">
+                <i class="fa-solid fa-truck-fast"></i>
+                <span>Fleet<span class="contact-logo-highlight">Manager</span></span>
+            </a>
+    
+            <div class="contact-hero-content">
+                <span class="contact-badge">
+                    <i class="fa-solid fa-headset"></i>
+                    Notre équipe est à votre écoute
+                </span>
+    
+                <h1>Parlons de votre <span>flotte automobile.</span></h1>
+    
+                <p>
+                    Une question sur nos fonctionnalités, nos abonnements ou
+                    la gestion de vos véhicules ? Notre équipe est là pour vous aider.
+                </p>
+    
+                <div class="contact-info-list">
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="fa-solid fa-envelope"></i>
+                        </div>
+                        <div>
+                            <h3>Envoyez-nous un e-mail</h3>
+                            <a href="mailto:contact@fleetmanager.com">
+                                contact@fleetmanager.com
+                            </a>
+                        </div>
+                    </div>
+    
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="fa-solid fa-phone"></i>
+                        </div>
+                        <div>
+                            <h3>Appelez-nous</h3>
+                            <a href="tel:+261340000000">+261 34 00 000 00</a>
+                        </div>
+                    </div>
+    
+                    <div class="contact-info-item">
+                        <div class="contact-info-icon">
+                            <i class="fa-solid fa-location-dot"></i>
+                        </div>
+                        <div>
+                            <h3>Notre localisation</h3>
+                            <p>Antananarivo, Madagascar</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="contact-hero-footer">
+                <i class="fa-solid fa-shield-halved"></i>
+                Votre confiance est notre priorité.
+            </div>
+        </section>
+    
+        <section class="contact-form-section">
+    
+            <div class="contact-form-wrapper">
+    
+                <a href="index.html" class="contact-back-link">
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Retour à l'accueil
+                </a>
+    
+                <div class="contact-heading">
+                    <span class="contact-subtitle">CONTACTEZ-NOUS</span>
+                    <h2>Envoyez-nous un message</h2>
+                    <p>
+                        Remplissez le formulaire ci-dessous.
+                        Nous vous répondrons dans les meilleurs délais.
+                    </p>
+                </div>
+    
+                <form action="#" method="POST" class="contact-form">
+    
+                    <div class="contact-field-row">
+                        <div class="contact-field">
+                            <label for="firstname">Prénom</label>
+                            <input
+                                type="text"
+                                id="firstname"
+                                name="firstname"
+                                placeholder="Votre prénom"
+                                autocomplete="given-name"
+                                required
+                            >
+                        </div>
+    
+                        <div class="contact-field">
+                            <label for="lastname">Nom</label>
+                            <input
+                                type="text"
+                                id="lastname"
+                                name="lastname"
+                                placeholder="Votre nom"
+                                autocomplete="family-name"
+                                required
+                            >
+                        </div>
+                    </div>
+    
+                    <div class="contact-field">
+                        <label for="email">Adresse e-mail</label>
+                        <div class="contact-input-icon">
+                            <i class="fa-solid fa-envelope"></i>
+                            <input
+                                type="email"
+                                id="email"
+                                name="email"
+                                placeholder="vous@entreprise.com"
+                                autocomplete="email"
+                                required
+                            >
+                        </div>
+                    </div>
+    
+                    <div class="contact-field">
+                        <label for="phone">Téléphone <span>(facultatif)</span></label>
+                        <div class="contact-input-icon">
+                            <i class="fa-solid fa-phone"></i>
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="+261 34 00 000 00"
+                                autocomplete="tel"
+                            >
+                        </div>
+                    </div>
+    
+                    <div class="contact-field">
+                        <label for="subject">Sujet du message</label>
+                        <select id="subject" name="subject" required>
+                            <option value="" disabled selected>
+                                Sélectionnez un sujet
+                            </option>
+                            <option value="information">Demande d'information</option>
+                            <option value="subscription">Abonnements et tarifs</option>
+                            <option value="demonstration">Demande de démonstration</option>
+                            <option value="technical">Assistance technique</option>
+                            <option value="partnership">Partenariat</option>
+                            <option value="other">Autre demande</option>
+                        </select>
+                    </div>
+    
+                    <div class="contact-field">
+                        <label for="message">Votre message</label>
+                        <textarea
+                            id="message"
+                            name="message"
+                            rows="5"
+                            placeholder="Expliquez-nous comment nous pouvons vous aider..."
+                            required
+                        ></textarea>
+                    </div>
+    
+                    <label class="contact-privacy">
+                        <input type="checkbox" name="privacy" required>
+                        <span>
+                            J'accepte que mes informations soient utilisées
+                            pour répondre à ma demande.
+                        </span>
+                    </label>
+    
+                    <button type="submit" class="contact-submit">
+                        Envoyer le message
+                        <i class="fa-solid fa-paper-plane"></i>
+                    </button>
+    
+                </form>
+    
+                <div class="contact-security">
+                    <i class="fa-solid fa-lock"></i>
+                    Vos informations restent confidentielles.
+                </div>
+    
+            </div>
+    
+        </section>
+
+    </main>
+
+
 {% endblock %}
