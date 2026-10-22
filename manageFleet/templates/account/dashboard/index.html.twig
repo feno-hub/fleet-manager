@@ -39,7 +39,7 @@
                 <span class="dashboard-welcome-label">VOTRE FLOTTE EN UN COUP D'ŒIL</span>
                 <h2>Bienvenue sur FleetManager !</h2>
                 <p>Suivez vos véhicules, maîtrisez vos dépenses et anticipez les entretiens.</p>
-                <a href="#vehicles" class="dashboard-primary-button">
+                <a href="{{ path('vehicule') }}" class="dashboard-primary-button">
                     <i class="fa-solid fa-car"></i>
                     Gérer les véhicules
                 </a>
@@ -226,7 +226,7 @@
                     <h3>Véhicules récents</h3>
                     <p>Consultez rapidement l'état de votre parc automobile.</p>
                 </div>
-                <a href="#vehicles" class="dashboard-outline-button">
+                <a href="{{ path('app_vehicle_new') }}" class="dashboard-outline-button">
                     <i class="fa-solid fa-plus"></i>
                     Ajouter un véhicule
                 </a>
@@ -245,58 +245,26 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>
-                                <div class="dashboard-vehicle-name">
-                                    <span class="dashboard-vehicle-icon"><i class="fa-solid fa-truck-pickup"></i></span>
-                                    <div><strong>Toyota Hilux</strong><span>Pickup</span></div>
-                                </div>
-                            </td>
-                            <td>1023 TBA</td>
-                            <td>Jean Rakoto</td>
-                            <td>45 200 km</td>
-                            <td><span class="dashboard-status dashboard-status-available">Disponible</span></td>
-                            <td><a href="#vehicles" class="dashboard-action-link" aria-label="Voir Toyota Hilux"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="dashboard-vehicle-name">
-                                    <span class="dashboard-vehicle-icon"><i class="fa-solid fa-car-side"></i></span>
-                                    <div><strong>Renault Duster</strong><span>SUV</span></div>
-                                </div>
-                            </td>
-                            <td>4587 TBC</td>
-                            <td>Marie Rasoanaivo</td>
-                            <td>32 800 km</td>
-                            <td><span class="dashboard-status dashboard-status-used">En mission</span></td>
-                            <td><a href="#vehicles" class="dashboard-action-link" aria-label="Voir Renault Duster"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="dashboard-vehicle-name">
-                                    <span class="dashboard-vehicle-icon"><i class="fa-solid fa-van-shuttle"></i></span>
-                                    <div><strong>Peugeot Partner</strong><span>Utilitaire</span></div>
-                                </div>
-                            </td>
-                            <td>6721 TBA</td>
-                            <td>Non assigné</td>
-                            <td>68 150 km</td>
-                            <td><span class="dashboard-status dashboard-status-maintenance">En entretien</span></td>
-                            <td><a href="#vehicles" class="dashboard-action-link" aria-label="Voir Peugeot Partner"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <div class="dashboard-vehicle-name">
-                                    <span class="dashboard-vehicle-icon"><i class="fa-solid fa-car"></i></span>
-                                    <div><strong>Hyundai Tucson</strong><span>SUV</span></div>
-                                </div>
-                            </td>
-                            <td>8214 TBC</td>
-                            <td>Paul Andria</td>
-                            <td>21 400 km</td>
-                            <td><span class="dashboard-status dashboard-status-available">Disponible</span></td>
-                            <td><a href="#vehicles" class="dashboard-action-link" aria-label="Voir Hyundai Tucson"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
-                        </tr>
+                        {% for vehicle in vehicles %}
+                            <tr>
+                                <td>
+                                    <div class="dashboard-vehicle-name">
+                                        <span class="dashboard-vehicle-icon"><i class="fa-solid fa-truck-pickup"></i></span>
+                                        <div>
+                                            <strong>
+                                                {{ vehicle.brand }}
+                                            </strong>
+                                            <span>Pickup</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>1023 TBA</td>
+                                <td>Jean Rakoto</td>
+                                <td>45 200 km</td>
+                                <td><span class="dashboard-status dashboard-status-available">Disponible</span></td>
+                                <td><a href="#vehicles" class="dashboard-action-link" aria-label="Voir Toyota Hilux"><i class="fa-solid fa-arrow-up-right-from-square"></i></a></td>
+                            </tr>
+                        {% endfor %}
                     </tbody>
                 </table>
             </div>

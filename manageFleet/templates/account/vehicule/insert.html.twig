@@ -1,0 +1,81 @@
+
+{% extends 'layouts/account.html.twig' %}
+
+{% block title %}Ajouter un véhicule - FleetManager{% endblock %}
+
+{% block page_heading %}Ajouter un véhicule{% endblock %}
+
+{% block body %}
+<div class="vehicle-page">
+    <div class="vehicle-breadcrumb">
+        <a href="{{ path('dashboard') }}">Tableau de bord</a>
+        <i class="fa-solid fa-chevron-right"></i>
+        <span>Ajouter un véhicule</span>
+    </div>
+
+    <div class="vehicle-page-heading">
+        <div>
+            <h1>Ajouter un véhicule</h1>
+            <p>Enregistrez les informations du véhicule dans votre flotte.</p>
+        </div>
+        <a href="{{ path('dashboard') }}" class="vehicle-back-button">
+            <i class="fa-solid fa-arrow-left"></i>
+            Retour
+        </a>
+    </div>
+
+    <div class="vehicle-card">
+        <div class="vehicle-card-header">
+            <div class="vehicle-icon">
+                <i class="fa-solid fa-car-side"></i>
+            </div>
+            <div>
+                <h2>Informations du véhicule</h2>
+                <p>Complétez les champs ci-dessous.</p>
+            </div>
+        </div>
+
+        {{ form_start(form, {'attr': {'class': 'vehicle-form'}}) }}
+
+            {{ form_errors(form) }}
+
+            <div class="vehicle-grid">
+                {% for field in [
+                    form.brand,
+                    form.model,
+                    form.registrationNumber,
+                    form.vin,
+                    form.vehicleType,
+                    form.color,
+                    form.year,
+                    form.mileage,
+                    form.status
+                ] %}
+                    <div class="vehicle-field">
+                        {{ form_label(field) }}
+                        {{ form_widget(field, {
+                            'attr': {
+                                'class': 'vehicle-input'
+                            }
+                        }) }}
+                        <div class="vehicle-error">
+                            {{ form_errors(field) }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <div class="vehicle-actions">
+                <a href="{{ path('dashboard') }}" class="vehicle-cancel-button">
+                    Annuler
+                </a>
+                <button type="submit" class="vehicle-submit-button">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    Enregistrer le véhicule
+                </button>
+            </div>
+
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}

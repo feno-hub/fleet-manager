@@ -20,11 +20,25 @@
         </div>
 
         <div class="home-nav-actions">
-            <a href="{{ path('app_login') }}" class="home-login">Connexion</a>
-            <a href="{{ path('app_register') }}" class="home-btn home-btn-primary">
-                Commencer
-                <i class="fa-solid fa-arrow-right"></i>
-            </a>
+            {% if app.user %}
+                <a href="{{ path('dashboard') }}" class="home-parent">
+                    <h1 class="profile">{{ app.user.firstName|slice(0, 1)|upper }}</h1>
+                    {# <a href="{{ path('dashboard') }}" class="home-login">Compte</a> #}
+                </a>
+                <a href="{{ path('app_logout') }}" class="home-btn home-btn-primary">
+                    deconnexion
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            {% else %}
+            
+                <a href="{{ path('app_login') }}" class="home-login">Connexion</a>
+                <a href="{{ path('app_register') }}" class="home-btn home-btn-primary">
+                    Commencer
+                    <i class="fa-solid fa-arrow-right"></i>
+                </a>
+
+            {% endif %}
         </div>
 
     </nav>
