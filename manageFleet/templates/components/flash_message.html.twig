@@ -1,0 +1,27 @@
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="flash-message flash-message-{{ label }}">
+            {% if label == 'warning' %}
+                <i class="fa-solid fa-clock"></i>
+            {% elseif label == 'success' %}
+                <i class="fa-solid fa-circle-check"></i>
+            {% elseif label == 'error' %}
+                <i class="fa-solid fa-circle-exclamation"></i>
+            {% else %}
+                <i class="fa-solid fa-circle-info"></i>
+            {% endif %}
+
+            <span class="message">{{ message }}</span>
+
+            <button
+                type="button"
+                class="flash-message-close"
+                aria-label="Fermer"
+                onclick="this.parentElement.remove()"
+            >
+                &times;
+            </button>
+        </div>
+    {% endfor %}
+{% endfor %}

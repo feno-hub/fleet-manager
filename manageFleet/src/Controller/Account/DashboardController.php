@@ -26,7 +26,7 @@ class DashboardController extends AbstractController
             return $this->redirectToRoute('app_login');
         }
 
-        if ($user->getStatus() !== 'pending') {
+        if ($user->getStatus() === 'pending') {
             $this->addFlash(
                 'warning',
                 'Votre compte est en attente de validation par l’administrateur.'
@@ -44,4 +44,3 @@ class DashboardController extends AbstractController
         ]);
     }
 }
-

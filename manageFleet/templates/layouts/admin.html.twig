@@ -1,0 +1,123 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Administration - FleetManager{% endblock %}</title>
+
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/css/styles.css') }}">
+
+    {% block stylesheets %}{% endblock %}
+</head>
+<body class="admin-body">
+
+    <div class="admin-layout">
+
+        <aside class="admin-sidebar">
+            <a href="{{ path('admin_dashboard') }}" class="admin-logo">
+                <span class="admin-logo-icon">
+                    <i class="fa-solid fa-car-side"></i>
+                </span>
+                <span>Fleet<span>Manager</span></span>
+            </a>
+
+            <div class="admin-sidebar-section">
+                <span class="admin-sidebar-label">MENU PRINCIPAL</span>
+
+                <nav class="admin-navigation">
+                    <a href="{{ path('admin_dashboard') }}"
+                       class="{{ app.request.attributes.get('_route') == 'admin_dashboard' ? 'active' : '' }}">
+                        <i class="fa-solid fa-chart-pie"></i>
+                        <span>Tableau de bord</span>
+                    </a>
+
+                    <a href="{{ path('admin_entreprises') }}">
+                        <i class="fa-solid fa-building"></i>
+                        <span>Entreprises</span>
+                    </a>
+
+                    <a href="{{ path('admin_dashboard') }}#utilisateurs">
+                        <i class="fa-solid fa-users"></i>
+                        <span>Utilisateurs</span>
+                    </a>
+
+                    <a href="{{ path('admin_dashboard') }}#vehicules">
+                        <i class="fa-solid fa-car"></i>
+                        <span>Véhicules</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="admin-sidebar-bottom">
+                <div class="admin-user">
+                    <div class="admin-user-avatar">
+                        {{ app.user.firstName|default('A')|first|upper }}
+                    </div>
+
+                    <div class="admin-user-info">
+                        <strong>
+                            {{ app.user.firstName|default('Administrateur') }}
+                            {{ app.user.lastName|default('') }}
+                        </strong>
+                        <span>Administrateur</span>
+                    </div>
+                </div>
+
+                <a href="{{ path('app_logout') }}" class="admin-logout">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                    <span>Déconnexion</span>
+                </a>
+            </div>
+        </aside>
+
+        <div class="admin-content">
+
+            <header class="admin-header">
+                <div class="admin-header-title">
+                    <span>ESPACE ADMINISTRATION</span>
+                    <h1>{% block page_title %}Tableau de bord{% endblock %}</h1>
+                </div>
+
+                <div class="admin-header-right">
+                    <span class="admin-online">
+                        <span></span>
+                        Plateforme active
+                    </span>
+
+                    <div class="admin-header-avatar">
+                        {{ app.user.firstName|default('A')|first|upper }}
+                    </div>
+                </div>
+            </header>
+
+            <main class="admin-page-content">
+                {% for label, messages in app.flashes %}
+                    {% for message in messages %}
+                        <div class="admin-flash admin-flash-{{ label }}">
+                            <span>{{ message }}</span>
+                            <button type="button"
+                                    onclick="this.parentElement.remove()"
+                                    aria-label="Fermer">
+                                &times;
+                            </button>
+                        </div>
+                    {% endfor %}
+                {% endfor %}
+
+                {% block body %}{% endblock %}
+            </main>
+
+            <footer class="admin-footer">
+                <span>© {{ "now"|date("Y") }} FleetManager</span>
+                <span>Administration de la plateforme</span>
+            </footer>
+
+        </div>
+    </div>
+
+    {% block javascripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,118 @@
+
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %}Administration - FleetManager{% endblock %}
+{% block page_title %}Tableau de bord{% endblock %}
+
+{% block body %}
+<section class="admin-welcome">
+    <div>
+        <span class="welcome-tag">VUE D'ENSEMBLE</span>
+        <h2>Bienvenue, {{ app.user.firstName }} !</h2>
+        <p>Suivez les entreprises et les véhicules de votre plateforme.</p>
+    </div>
+    <div class="welcome-icon">
+        <i class="fa-solid fa-chart-line"></i>
+    </div>
+</section>
+
+<section class="admin-stats">
+    <article class="stat-card">
+        <div class="stat-card-top">
+            <span>Total entreprises et comptes</span>
+            <span class="stat-icon blue">
+                <i class="fa-solid fa-building"></i>
+            </span>
+        </div>
+        <strong class="stat-number">{{ totalUsers }}</strong>
+        <span class="stat-caption">Comptes enregistrés</span>
+    </article>
+
+    <article class="stat-card">
+        <div class="stat-card-top">
+            <span>En attente</span>
+            <span class="stat-icon orange">
+                <i class="fa-solid fa-clock"></i>
+            </span>
+        </div>
+        <strong class="stat-number">{{ pendingUsers }}</strong>
+        <span class="stat-caption">Demandes à examiner</span>
+    </article>
+
+    <article class="stat-card">
+        <div class="stat-card-top">
+            <span>Comptes acceptés</span>
+            <span class="stat-icon green">
+                <i class="fa-solid fa-circle-check"></i>
+            </span>
+        </div>
+        <strong class="stat-number">{{ approvedUsers }}</strong>
+        <span class="stat-caption">Comptes validés</span>
+    </article>
+
+    <article class="stat-card" id="vehicules">
+        <div class="stat-card-top">
+            <span>Véhicules</span>
+            <span class="stat-icon purple">
+                <i class="fa-solid fa-car-side"></i>
+            </span>
+        </div>
+        <strong class="stat-number">{{ totalVehicles }}</strong>
+        <span class="stat-caption">Véhicules enregistrés</span>
+    </article>
+</section>
+
+<section class="admin-panel" id="entreprises">
+    <div class="panel-heading">
+        <div>
+            <h2>Dernières inscriptions</h2>
+            <p>Consultez les comptes récemment créés.</p>
+        </div>
+    </div>
+
+    <div class="admin-table-wrapper">
+        <table class="admin-table" id="utilisateurs">
+            <thead>
+                <tr>
+                    <th>Entreprise</th>
+                    <th>Responsable</th>
+                    <th>Email</th>
+                    <th>Statut</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in recentUsers %}
+                    <tr>
+                        <td>
+                            <div class="company-cell">
+                                <span class="company-avatar">
+                                    {{ user.nameCompany|first|upper }}
+                                </span>
+                                <strong>{{ user.nameCompany }}</strong>
+                            </div>
+                        </td>
+                        <td>{{ user.firstName }} {{ user.lastName }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>
+                            {% if user.status == 'accepted' %}
+                                <span class="status-badge accepted">Accepté</span>
+                            {% elseif user.status == 'pending' %}
+                                <span class="status-badge pending">En attente</span>
+                            {% else %}
+                                <span class="status-badge rejected">{{ user.status }}</span>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="4" class="empty-state">
+                            <i class="fa-solid fa-inbox"></i>
+                            <p>Aucune inscription pour le moment.</p>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

@@ -69,8 +69,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private bool $isVerified = false;
 
-    #[ORM\Column(length: 255)]
-    private ?string $status = null;
+    #[ORM\Column(length: 255, options: ['default' => 'pending'])]
+    private string $status = 'pending';
 
     /**
      * @var Collection<int, Vehicle>
@@ -293,7 +293,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getStatus(): ?string
+    public function getStatus(): string
     {
         return $this->status;
     }
@@ -303,6 +303,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->status = $status;
 
         return $this;
+    }
+
+    public function isApproved(): bool
+    {
+        return $this->status === 'accepted';
     }
 
     /**

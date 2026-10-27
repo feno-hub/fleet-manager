@@ -12,18 +12,10 @@
 
         <div class="home-header-overlay"></div>
 
+        {% include 'components/flash_message.html.twig' %}
+
         <section class="home-hero" id="accueil">
             <div class="home-hero-content">
-
-            {% for message in app.flashes('success') %}
-                <div class="home-alert home-alert-success" role="status">
-                    <i class="fa-solid fa-circle-check"></i>
-                    <div>
-                        <strong>Inscription réussie !</strong>
-                        <p>{{ message }}</p>
-                    </div>
-                </div>
-            {% endfor %}
 
                 <span class="home-hero-badge">
                     <i class="fa-solid fa-location-dot"></i>

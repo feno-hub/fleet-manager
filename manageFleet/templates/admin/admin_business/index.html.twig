@@ -1,0 +1,161 @@
+
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %}Liste des entreprises - FleetManager{% endblock %}
+{% block page_title %}Liste des entreprises{% endblock %}
+
+{% block body %}
+<section class="entreprises-page">
+
+    <div class="entreprises-intro">
+        <div>
+            <span class="entreprises-eyebrow">GESTION DE LA PLATEFORME</span>
+            <h2>Liste des entreprises</h2>
+            <p>Consultez les comptes et suivez leur statut de validation.</p>
+        </div>
+
+        <div class="entreprises-total">
+            <i class="fa-solid fa-building"></i>
+            <div>
+                <strong>{{ totalEntreprises }}</strong>
+                <span>Entreprises inscrites</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="entreprises-panel">
+
+        <div class="entreprises-panel-heading">
+            <div>
+                <h3>Toutes les entreprises</h3>
+                <p>Filtrez les comptes selon leur statut.</p>
+            </div>
+
+            <form method="get"
+                  action="{{ path('admin_entreprises') }}"
+                  class="entreprises-filter">
+
+                <label for="status">Statut</label>
+
+                <select id="status" name="status" onchange="this.form.submit()">
+                    <option value="tous" {% if statusActuel == 'tous' %}selected{% endif %}>
+                        Tous les statuts
+                    </option>
+                    <option value="en_attente" {% if statusActuel == 'en_attente' %}selected{% endif %}>
+                        En attente
+                    </option>
+                    <option value="accepte" {% if statusActuel == 'accepte' %}selected{% endif %}>
+                        Acceptées
+                    </option>
+                    <option value="refuse" {% if statusActuel == 'refuse' %}selected{% endif %}>
+                        Refusées
+                    </option>
+                </select>
+            </form>
+        </div>
+
+        <div class="entreprises-table-wrapper">
+            <table class="entreprises-table">
+                <thead>
+                    <tr>
+                        <th>Entreprise</th>
+                        <th>Responsable</th>
+                        <th>Email</th>
+                        <th>Téléphone</th>
+                        <th>Date d'inscription</th>
+                        <th>Statut</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    {% for entreprise in entreprises %}
+                        <tr>
+                            <td>
+                                <div class="entreprise-name">
+                                    <span class="entreprise-avatar">
+                                        {{ entreprise.nameCompany|default('E')|first|upper }}
+                                    </span>
+                                    <div>
+                                        <strong>{{ entreprise.nameCompany|default('Entreprise sans nom') }}</strong>
+                                        <small>
+                                            {% if entreprise.nif is defined and entreprise.nif %}
+                                                NIF : {{ entreprise.nif }}
+                                            {% else %}
+                                                Compte entreprise
+                                            {% endif %}
+                                        </small>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                {{ entreprise.firstName }}
+                                {{ entreprise.lastName }}
+                            </td>
+
+                            <td>{{ entreprise.email }}</td>
+
+                            <td>{{ entreprise.phone|default('Non renseigné') }}</td>
+
+                            <td>
+                                {% if entreprise.createdAt %}
+                                    {{ entreprise.createdAt|date('d/m/Y') }}
+                                {% else %}
+                                    —
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                {% if entreprise.status == 'accepte' %}
+                                    <span class="entreprise-status accepted">
+                                        <i class="fa-solid fa-circle-check"></i>
+                                        Acceptée
+                                    </span>
+                                {% elseif entreprise.status == 'en_attente' %}
+                                    <span class="entreprise-status pending">
+                                        <i class="fa-solid fa-clock"></i>
+                                        En attente
+                                    </span>
+                                {% elseif entreprise.status == 'refuse' %}
+                                    <span class="entreprise-status rejected">
+                                        <i class="fa-solid fa-circle-xmark"></i>
+                                        Refusée
+                                    </span>
+                                {% else %}
+                                    <span class="entreprise-status unknown">
+                                        {{ entreprise.status|default('Non défini') }}
+                                    </span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="6">
+                                <div class="entreprises-empty">
+                                    <i class="fa-solid fa-building-circle-exclamation"></i>
+                                    <strong>Aucune entreprise trouvée</strong>
+                                    <p>Aucune entreprise ne correspond à ce filtre.</p>
+                                    {% if statusActuel != 'tous' %}
+                                        <a href="{{ path('admin_entreprises') }}">
+                                            Afficher toutes les entreprises
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <div class="entreprises-footer">
+            <span>{{ entreprises|length }} résultat(s)</span>
+            <a href="{{ path('admin_entreprises') }}">
+                <i class="fa-solid fa-rotate-right"></i>
+                Réinitialiser les filtres
+            </a>
+        </div>
+
+    </div>
+</section>
+{% endblock %}
