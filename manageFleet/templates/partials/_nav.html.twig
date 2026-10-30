@@ -12,19 +12,47 @@
         </label>
 
         <div class="home-nav-links">
-            <a href="{{ path('home') }}" class="active">Accueil</a>
-            <a href="{{ path('fonctionality') }}">Fonctionnalités</a>
-            <a href="{{ path('advantage') }}">Avantages</a>
-            <a href="{{ path('price') }}">Tarifs</a>
-            <a href="{{ path('contact') }}">Contact</a>
+            <a href="{{ path('home') }}" 
+                class="{{ app.request.attributes.get('_route') == "home" ? 'active' : "" }}"
+            >
+                Accueil
+            </a>
+            <a href="{{ path('fonctionality') }}"
+                class="{{ app.request.attributes.get('_route') == "fonctionality" ? 'active' : "" }}"
+            >
+                Fonctionnalités
+            </a>
+            <a href="{{ path('advantage') }}"
+                class="{{ app.request.attributes.get('_route') == "advantage" ? 'active' : "" }}"
+            >
+                Avantages
+            </a>
+            <a href="{{ path('price') }}"
+                class="{{ app.request.attributes.get('_route') == "price" ? 'active' : "" }}"
+            >
+                Tarifs
+            </a>
+            <a href="{{ path('contact') }}"
+                class="{{ app.request.attributes.get('_route') == "contact" ? 'active' : "" }}"
+            >
+                Contact
+            </a>
         </div>
 
         <div class="home-nav-actions">
             {% if app.user %}
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <a href="{{ path('admin_dashboard') }}" class="home-parent">
+                    <h1 class="profile">{{ app.user.firstName|slice(0, 1)|upper }}</h1>
+                </a>
+            {% else %}
                 <a href="{{ path('dashboard') }}" class="home-parent">
                     <h1 class="profile">{{ app.user.firstName|slice(0, 1)|upper }}</h1>
-                    {# <a href="{{ path('dashboard') }}" class="home-login">Compte</a> #}
                 </a>
+            {% endif %}
+
+                
                 <a href="{{ path('app_logout') }}" class="home-btn home-btn-primary">
                     deconnexion
                     <i class="fa-solid fa-arrow-right"></i>

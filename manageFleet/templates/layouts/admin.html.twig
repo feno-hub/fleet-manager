@@ -17,7 +17,7 @@
     <div class="admin-layout">
 
         <aside class="admin-sidebar">
-            <a href="{{ path('admin_dashboard') }}" class="admin-logo">
+            <a href="{{ path('home') }}" class="admin-logo">
                 <span class="admin-logo-icon">
                     <i class="fa-solid fa-car-side"></i>
                 </span>
@@ -34,12 +34,16 @@
                         <span>Tableau de bord</span>
                     </a>
 
-                    <a href="{{ path('admin_entreprises') }}">
+                    <a href="{{ path('app_admin_company') }}" 
+                        class="{{ app.request.attributes.get('_route') == 'app_admin_company' ? 'active' : '' }}"    
+                    >
                         <i class="fa-solid fa-building"></i>
                         <span>Entreprises</span>
                     </a>
 
-                    <a href="{{ path('admin_dashboard') }}#utilisateurs">
+                    <a href="{{ path('app.admin.user') }}"
+                        class="{{ app.request.attributes.get('_route') == 'app.admin.user' ? 'active' : '' }}"
+                    >
                         <i class="fa-solid fa-users"></i>
                         <span>Utilisateurs</span>
                     </a>

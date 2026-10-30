@@ -1,0 +1,192 @@
+
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %}Gestion des utilisateurs - FleetManager{% endblock %}
+{% block page_title %}
+    Listes des utilisateurs
+{% endblock %}
+
+{% block body %}
+<div class="admin-users">
+    <div class="admin-users__header">
+        <div>
+            <span class="admin-users__eyebrow">SUPER ADMINISTRATION</span>
+            <h1>Gestion des utilisateurs</h1>
+            <p>Consultez et gérez les comptes de toutes les entreprises.</p>
+        </div>
+    </div>
+
+    <div class="admin-users__stats">
+        <div class="admin-users__stat">
+            <span class="admin-users__stat-icon blue">
+                <i class="fas fa-users"></i>
+            </span>
+            <div>
+                <span>Total utilisateurs</span>
+                <strong>{{ totalUtilisateurs }}</strong>
+            </div>
+        </div>
+
+        <div class="admin-users__stat">
+            <span class="admin-users__stat-icon orange">
+                <i class="fas fa-clock"></i>
+            </span>
+            <div>
+                <span>En attente</span>
+                <strong>{{ totalEnAttente }}</strong>
+            </div>
+        </div>
+
+        <div class="admin-users__stat">
+            <span class="admin-users__stat-icon green">
+                <i class="fas fa-user-check"></i>
+            </span>
+            <div>
+                <span>Approuvés</span>
+                <strong>{{ totalApprouves }}</strong>
+            </div>
+        </div>
+
+        <div class="admin-users__stat">
+            <span class="admin-users__stat-icon red">
+                <i class="fas fa-user-times"></i>
+            </span>
+            <div>
+                <span>Refusés</span>
+                <strong>{{ totalRefuses }}</strong>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-users__panel">
+        <div class="admin-users__panel-header">
+            <div>
+                <h2>Liste des comptes</h2>
+                <p>Recherchez et filtrez les utilisateurs inscrits.</p>
+            </div>
+            <span class="admin-users__count">
+                {{ utilisateurs|length }} résultat(s)
+            </span>
+        </div>
+
+        <form method="get"
+              action="{{ path('app.admin.user') }}"
+              class="admin-users__filters">
+
+            <div class="admin-users__search">
+                <i class="fas fa-search"></i>
+                <input
+                    type="search"
+                    name="recherche"
+                    value="{{ recherche }}"
+                    placeholder="Nom, email ou entreprise..."
+                >
+            </div>
+
+            <select name="status" aria-label="Filtrer par statut">
+                <option value="tous"
+                    {{ statusActuel == 'tous' ? 'selected' : '' }}>
+                    Tous les statuts
+                </option>
+                <option value="en_attente"
+                    {{ statusActuel == 'en_attente' ? 'selected' : '' }}>
+                    En attente
+                </option>
+                <option value="accepte"
+                    {{ statusActuel == 'accepte' ? 'selected' : '' }}>
+                    Approuvés
+                </option>
+                <option value="refuse"
+                    {{ statusActuel == 'refuse' ? 'selected' : '' }}>
+                    Refusés
+                </option>
+            </select>
+
+            <button type="submit" class="admin-users__filter-btn">
+                <i class="fas fa-filter"></i>
+                Filtrer
+            </button>
+
+            <a href="{{ path('app.admin.user') }}"
+               class="admin-users__reset">
+                Réinitialiser
+            </a>
+        </form>
+
+        <div class="admin-users__table-wrapper">
+            <table class="admin-users__table">
+                <thead>
+                    <tr>
+                        <th>Utilisateur</th>
+                        <th>Entreprise</th>
+                        <th>Téléphone</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for utilisateur in utilisateurs %}
+                        <tr>
+                            <td>
+                                <div class="admin-users__identity">
+                                    <div class="admin-users__avatar">
+                                        {{ utilisateur.firstName|default('U')|slice(0, 1)|upper }}
+                                        {{ utilisateur.lastName|default('')|slice(0, 1)|upper }}
+                                    </div>
+                                    <div>
+                                        <strong>
+                                            {{ utilisateur.firstName }}
+                                            {{ utilisateur.lastName }}
+                                        </strong>
+                                        <span>{{ utilisateur.email }}</span>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                {{ utilisateur.nameCompany|default('Non renseignée') }}
+                            </td>
+
+                            <td>
+                                {{ utilisateur.phone|default('Non renseigné') }}
+                            </td>
+
+                            <td>
+                                <span class="admin-users__badge
+                                    {{ utilisateur.status == 'accepte' ? 'is-approved' :
+                                       (utilisateur.status == 'refuse' ? 'is-refused' : 'is-pending') }}">
+                                    {% if utilisateur.status == 'accepte' %}
+                                        Approuvé
+                                    {% elseif utilisateur.status == 'refuse' %}
+                                        Refusé
+                                    {% else %}
+                                        En attente
+                                    {% endif %}
+                                </span>
+                            </td>
+
+                            <td>
+                                <a
+                                    href=""
+                                    class="admin-users__action"
+                                    title="Voir les détails"
+                                >
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="admin-users__empty">
+                                <i class="fas fa-users"></i>
+                                <strong>Aucun utilisateur trouvé</strong>
+                                <span>Modifiez votre recherche ou votre filtre.</span>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

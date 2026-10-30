@@ -52,7 +52,7 @@ final class VehiculeController extends AbstractController
 
             $this->addFlash('success', 'Le véhicule a été ajouté avec succès.');
 
-            return $this->redirectToRoute('app_vehicle_new');
+            return $this->redirectToRoute('dashboard');
         }
 
         return $this->render('account/vehicule/insert.html.twig', [

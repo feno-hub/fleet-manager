@@ -17,7 +17,7 @@
         <div class="entreprises-total">
             <i class="fa-solid fa-building"></i>
             <div>
-                <strong>{{ totalEntreprises }}</strong>
+                <strong>{{ totalUser|length }}</strong>
                 <span>Entreprises inscrites</span>
             </div>
         </div>
@@ -32,24 +32,24 @@
             </div>
 
             <form method="get"
-                  action="{{ path('admin_entreprises') }}"
+                  action="{{ path('app_admin_company') }}"
                   class="entreprises-filter">
 
                 <label for="status">Statut</label>
 
                 <select id="status" name="status" onchange="this.form.submit()">
-                    <option value="tous" {% if statusActuel == 'tous' %}selected{% endif %}>
+                    <option value="all" {% if currentStatus == 'all' %}selected{% endif %}>
                         Tous les statuts
                     </option>
-                    <option value="en_attente" {% if statusActuel == 'en_attente' %}selected{% endif %}>
-                        En attente
-                    </option>
-                    <option value="accepte" {% if statusActuel == 'accepte' %}selected{% endif %}>
-                        Acceptées
-                    </option>
-                    <option value="refuse" {% if statusActuel == 'refuse' %}selected{% endif %}>
-                        Refusées
-                    </option>
+                        <option value="pending" {% if currentStatus == 'pending' %}selected{% endif %}>
+                            En attente
+                        </option>
+                        <option value="accepted" {% if currentStatus == 'accepted' %}selected{% endif %}>
+                            Acceptées
+                        </option>
+                        <option value="reject" {% if currentStatus == 'reject' %}selected{% endif %}>
+                            Refusées
+                        </option>
                 </select>
             </form>
         </div>
@@ -68,18 +68,18 @@
                 </thead>
 
                 <tbody>
-                    {% for entreprise in entreprises %}
+                    {% for user in users %}
                         <tr>
                             <td>
                                 <div class="entreprise-name">
                                     <span class="entreprise-avatar">
-                                        {{ entreprise.nameCompany|default('E')|first|upper }}
+                                        {{ user.nameCompany|default('E')|first|upper }}
                                     </span>
                                     <div>
-                                        <strong>{{ entreprise.nameCompany|default('Entreprise sans nom') }}</strong>
+                                        <strong>{{ user.nameCompany|default('Entreprise sans nom') }}</strong>
                                         <small>
-                                            {% if entreprise.nif is defined and entreprise.nif %}
-                                                NIF : {{ entreprise.nif }}
+                                            {% if user.nif is defined and user.nif %}
+                                                NIF : {{ user.nif }}
                                             {% else %}
                                                 Compte entreprise
                                             {% endif %}
@@ -89,41 +89,41 @@
                             </td>
 
                             <td>
-                                {{ entreprise.firstName }}
-                                {{ entreprise.lastName }}
+                                {{ user.firstName }}
+                                {{ user.lastName }}
                             </td>
 
-                            <td>{{ entreprise.email }}</td>
+                            <td>{{ user.email }}</td>
 
-                            <td>{{ entreprise.phone|default('Non renseigné') }}</td>
+                            <td>{{ user.phone|default('Non renseigné') }}</td>
 
                             <td>
-                                {% if entreprise.createdAt %}
-                                    {{ entreprise.createdAt|date('d/m/Y') }}
+                                {% if user.createdAt %}
+                                    {{ user.createdAt|date('d/m/Y') }}
                                 {% else %}
                                     —
                                 {% endif %}
                             </td>
 
                             <td>
-                                {% if entreprise.status == 'accepte' %}
+                                {% if user.status == 'accepte' %}
                                     <span class="entreprise-status accepted">
                                         <i class="fa-solid fa-circle-check"></i>
                                         Acceptée
                                     </span>
-                                {% elseif entreprise.status == 'en_attente' %}
+                                {% elseif user.status == 'en_attente' %}
                                     <span class="entreprise-status pending">
                                         <i class="fa-solid fa-clock"></i>
                                         En attente
                                     </span>
-                                {% elseif entreprise.status == 'refuse' %}
+                                {% elseif user.status == 'refuse' %}
                                     <span class="entreprise-status rejected">
                                         <i class="fa-solid fa-circle-xmark"></i>
                                         Refusée
                                     </span>
                                 {% else %}
                                     <span class="entreprise-status unknown">
-                                        {{ entreprise.status|default('Non défini') }}
+                                        {{ user.status|default('Non défini') }}
                                     </span>
                                 {% endif %}
                             </td>
@@ -135,8 +135,8 @@
                                     <i class="fa-solid fa-building-circle-exclamation"></i>
                                     <strong>Aucune entreprise trouvée</strong>
                                     <p>Aucune entreprise ne correspond à ce filtre.</p>
-                                    {% if statusActuel != 'tous' %}
-                                        <a href="{{ path('admin_entreprises') }}">
+                                    {% if currentStatus != 'all' %}
+                                        <a href="{{ path('app_admin_company') }}">
                                             Afficher toutes les entreprises
                                         </a>
                                     {% endif %}
@@ -149,8 +149,8 @@
         </div>
 
         <div class="entreprises-footer">
-            <span>{{ entreprises|length }} résultat(s)</span>
-            <a href="{{ path('admin_entreprises') }}">
+            <span>{{ users|length }} résultat(s)</span>
+            <a href="{{ path('app_admin_company') }}">
                 <i class="fa-solid fa-rotate-right"></i>
                 Réinitialiser les filtres
             </a>
