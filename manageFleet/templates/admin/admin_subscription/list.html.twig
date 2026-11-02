@@ -1,0 +1,370 @@
+
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %}gestion des abonnements - FleetManager{% endblock %}
+{% block page_title %}Gestion des abonnemnets{% endblock %}
+
+{% block body %}
+
+<div class="subscription-page">
+
+    <div class="subscription-header">
+        <div>
+            <span class="page-eyebrow">ADMINISTRATION</span>
+            <h1>Gestion des abonnements</h1>
+            <p>Gérez les formules, les renouvellements et les abonnements des entreprises.</p>
+        </div>
+
+        <a href="#subscription-table" class="btn-primary">
+            <i class="fas fa-list"></i>
+            Voir les abonnements
+        </a>
+    </div>
+
+    <div class="subscription-stats">
+        <div class="stat-card">
+            <div class="stat-icon blue">
+                <i class="fas fa-layer-group"></i>
+            </div>
+            <div>
+                <span>Total abonnements</span>
+                <h2>{{ totalSubscriptions|default(0) }}</h2>
+                <small>Toutes les formules</small>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon green">
+                <i class="fas fa-circle-check"></i>
+            </div>
+            <div>
+                <span>Actifs</span>
+                <h2>{{ activeSubscriptions|default(0) }}</h2>
+                <small>Abonnements en cours</small>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon orange">
+                <i class="fas fa-clock"></i>
+            </div>
+            <div>
+                <span>En attente</span>
+                <h2>{{ pendingSubscriptions|default(0) }}</h2>
+                <small>À vérifier</small>
+            </div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon red">
+                <i class="fas fa-calendar-xmark"></i>
+            </div>
+            <div>
+                <span>Expirés</span>
+                <h2>{{ expiredSubscriptions|default(0) }}</h2>
+                <small>À renouveler</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="subscription-content">
+        <div class="section-heading">
+            <div>
+                <h2>Liste des abonnements</h2>
+                <p>Retrouvez et gérez les abonnements des entreprises inscrites.</p>
+            </div>
+        </div>
+
+        <form method="get" action="{{ path('app.admin.subscription') }}"
+              class="subscription-filters">
+
+            <div class="search-field">
+                <i class="fas fa-search"></i>
+                <input
+                    type="search"
+                    name="search"
+                    value="{{ search|default('') }}"
+                    placeholder="Rechercher une entreprise..."
+                >
+            </div>
+
+            <select name="plan">
+                <option value="">Toutes les formules</option>
+                <option value="Gratuit" {% if planActuel|default('') == 'Gratuit' %}selected{% endif %}>Gratuit</option>
+                <option value="Standard" {% if planActuel|default('') == 'Standard' %}selected{% endif %}>Standard</option>
+                <option value="Premium" {% if planActuel|default('') == 'Premium' %}selected{% endif %}>Premium</option>
+            </select>
+
+            <select name="status">
+                <option value="">Tous les statuts</option>
+                <option value="active" {% if statusActuel|default('') == 'active' %}selected{% endif %}>Actif</option>
+                <option value="pending" {% if statusActuel|default('') == 'pending' %}selected{% endif %}>En attente</option>
+                <option value="expired" {% if statusActuel|default('') == 'expired' %}selected{% endif %}>Expiré</option>
+                <option value="cancelled" {% if statusActuel|default('') == 'cancelled' %}selected{% endif %}>Résilié</option>
+            </select>
+
+            <button type="submit" class="btn-filter">
+                <i class="fas fa-filter"></i>
+                Filtrer
+            </button>
+
+            <a href="{{ path('app.admin.subscription') }}" class="btn-reset">
+                Réinitialiser
+            </a>
+        </form>
+
+        <div class="subscription-table-wrapper" id="subscription-table">
+            <table class="subscription-table">
+                <thead>
+                    <tr>
+                        <th>Entreprise</th>
+                        <th>Formule</th>
+                        <th>Prix</th>
+                        <th>Début</th>
+                        <th>Fin</th>
+                        <th>Statut</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+{# 
+                <tbody>
+                    {% for subscription in subscriptions %}
+                        <tr>
+                            <td>
+                                <div class="company-cell">
+                                    <div class="company-avatar">
+                                        {{ subscription.user.nameCompany|default('E')|slice(0, 1)|upper }}
+                                    </div>
+                                    <div>
+                                        <strong>{{ subscription.user.nameCompany|default('Entreprise inconnue') }}</strong>
+                                        <small>{{ subscription.user.email|default('') }}</small>
+                                    </div>
+                                </div>
+                            </td>
+
+                            <td>
+                                <span class="plan-badge {{ subscription.plan|default('Gratuit')|lower }}">
+                                    {{ subscription.plan|default('Gratuit') }}
+                                </span>
+                            </td>
+
+                            <td class="price-cell">
+                                {{ subscription.price|default(0)|number_format(0, ',', ' ') }} Ar
+                            </td>
+
+                            <td>
+                                {{ subscription.startDate is defined and subscription.startDate
+                                    ? subscription.startDate|date('d/m/Y')
+                                    : '—' }}
+                            </td>
+
+                            <td>
+                                {{ subscription.endDate is defined and subscription.endDate
+                                    ? subscription.endDate|date('d/m/Y')
+                                    : '—' }}
+                            </td>
+
+                            <td>
+                                {% set currentStatus = subscription.status|default('pending') %}
+
+                                <span class="status-badge status-{{ currentStatus }}">
+                                    <span></span>
+                                    {% if currentStatus == 'active' %}
+                                        Actif
+                                    {% elseif currentStatus == 'pending' %}
+                                        En attente
+                                    {% elseif currentStatus == 'expired' %}
+                                        Expiré
+                                    {% elseif currentStatus == 'cancelled' %}
+                                        Résilié
+                                    {% else %}
+                                        {{ currentStatus }}
+                                    {% endif %}
+                                </span>
+                            </td>
+
+                            <td>
+                                <div class="table-actions">
+                                    <a href="{{ path('admin_abonnement_show', {id: subscription.id}) }}"
+                                       class="action-btn view"
+                                       title="Consulter" aria-label="Consulter l'abonnement">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+
+                                    <a href="{{ path('admin_abonnement_edit', {id: subscription.id}) }}"
+                                       class="action-btn edit"
+                                       title="Modifier" aria-label="Modifier l'abonnement">
+                                        <i class="fas fa-pen"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="7">
+                                <div class="empty-state">
+                                    <i class="fas fa-box-open"></i>
+                                    <h3>Aucun abonnement trouvé</h3>
+                                    <p>Essayez de modifier les filtres ou revenez plus tard.</p>
+                                </div>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody> #}
+                
+                <tbody>
+                    <tr>
+                        <td>
+                            <div class="company-cell">
+                                <div class="company-avatar">T</div>
+                                <div>
+                                    <strong>Transport Mada</strong>
+                                    <small>contact@transportmada.mg</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="plan-badge premium">Premium</span></td>
+                        <td class="price-cell">250 000 Ar</td>
+                        <td>01/10/2026</td>
+                        <td>01/11/2026</td>
+                        <td>
+                            <span class="status-badge status-active">
+                                <span></span> Actif
+                            </span>
+                        </td>
+                        <td>
+                            <div class="table-actions">
+                                <a href="{{ path('app.admin.subscription.show') }}" class="action-btn view" title="detail">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="company-cell">
+                                <div class="company-avatar">M</div>
+                                <div>
+                                    <strong>Madagascar Logistique</strong>
+                                    <small>admin@madalogistique.mg</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="plan-badge standard">Standard</span></td>
+                        <td class="price-cell">120 000 Ar</td>
+                        <td>15/10/2026</td>
+                        <td>15/11/2026</td>
+                        <td>
+                            <span class="status-badge status-active">
+                                <span></span> Actif
+                            </span>
+                        </td>
+                        <td>
+                            <div class="table-actions">
+                                <a href="{{ path('app.admin.subscription.show') }}" class="action-btn view" title="detail">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="company-cell">
+                                <div class="company-avatar">V</div>
+                                <div>
+                                    <strong>Vita Express</strong>
+                                    <small>contact@vitaexpress.mg</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="plan-badge gratuit">Gratuit</span></td>
+                        <td class="price-cell">0 Ar</td>
+                        <td>20/10/2026</td>
+                        <td>20/11/2026</td>
+                        <td>
+                            <span class="status-badge status-pending">
+                                <span></span> En attente
+                            </span>
+                        </td>
+                        <td>
+                            <div class="table-actions">
+                                <a href="{{ path('app.admin.subscription.show') }}" class="action-btn view" title="detail">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="company-cell">
+                                <div class="company-avatar">A</div>
+                                <div>
+                                    <strong>Auto Service Pro</strong>
+                                    <small>info@autoservice.mg</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="plan-badge premium">Premium</span></td>
+                        <td class="price-cell">250 000 Ar</td>
+                        <td>01/09/2026</td>
+                        <td>01/10/2026</td>
+                        <td>
+                            <span class="status-badge status-expired">
+                                <span></span> Expiré
+                            </span>
+                        </td>
+                        <td>
+                            <div class="table-actions">
+                                <a href="{{ path('app.admin.subscription.show') }}" class="action-btn view" title="detail">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="company-cell">
+                                <div class="company-avatar">G</div>
+                                <div>
+                                    <strong>Green Transport</strong>
+                                    <small>contact@greentransport.mg</small>
+                                </div>
+                            </div>
+                        </td>
+                        <td><span class="plan-badge standard">Standard</span></td>
+                        <td class="price-cell">120 000 Ar</td>
+                        <td>05/09/2026</td>
+                        <td>05/10/2026</td>
+                        <td>
+                            <span class="status-badge status-cancelled">
+                                <span></span> Résilié
+                            </span>
+                        </td>
+                        <td>
+                            <div class="table-actions">
+                                <a href="{{ path('app.admin.subscription.show') }}" class="action-btn view" title="detail">
+                                    <i class="fas fa-eye"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+        </div>
+
+        {# {% if subscriptions.haveToPaginate is defined and subscriptions.haveToPaginate %}
+            <div class="pagination-container">
+                {{ knp_pagination_render(subscriptions) }}
+            </div>
+        {% endif %} #}
+    </div>
+</div>
+
+
+
+{% endblock %}

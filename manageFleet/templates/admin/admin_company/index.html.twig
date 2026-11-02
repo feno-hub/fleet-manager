@@ -47,7 +47,7 @@
                         <option value="accepted" {% if currentStatus == 'accepted' %}selected{% endif %}>
                             Acceptées
                         </option>
-                        <option value="reject" {% if currentStatus == 'reject' %}selected{% endif %}>
+                        <option value="reject" {% if currentStatus == 'rejected' %}selected{% endif %}>
                             Refusées
                         </option>
                 </select>
@@ -106,17 +106,17 @@
                             </td>
 
                             <td>
-                                {% if user.status == 'accepte' %}
+                                {% if user.status == 'accepted' %}
                                     <span class="entreprise-status accepted">
                                         <i class="fa-solid fa-circle-check"></i>
                                         Acceptée
                                     </span>
-                                {% elseif user.status == 'en_attente' %}
+                                {% elseif user.status == 'pending' %}
                                     <span class="entreprise-status pending">
                                         <i class="fa-solid fa-clock"></i>
                                         En attente
                                     </span>
-                                {% elseif user.status == 'refuse' %}
+                                {% elseif user.status == 'rejected' %}
                                     <span class="entreprise-status rejected">
                                         <i class="fa-solid fa-circle-xmark"></i>
                                         Refusée

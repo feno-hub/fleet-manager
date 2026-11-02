@@ -89,15 +89,15 @@
                     Tous les statuts
                 </option>
                 <option value="en_attente"
-                    {{ statusActuel == 'en_attente' ? 'selected' : '' }}>
+                    {{ statusActuel == 'pending' ? 'selected' : '' }}>
                     En attente
                 </option>
                 <option value="accepte"
-                    {{ statusActuel == 'accepte' ? 'selected' : '' }}>
+                    {{ statusActuel == 'accepted' ? 'selected' : '' }}>
                     Approuvés
                 </option>
                 <option value="refuse"
-                    {{ statusActuel == 'refuse' ? 'selected' : '' }}>
+                    {{ statusActuel == 'rejected' ? 'selected' : '' }}>
                     Refusés
                 </option>
             </select>
@@ -153,11 +153,11 @@
 
                             <td>
                                 <span class="admin-users__badge
-                                    {{ utilisateur.status == 'accepte' ? 'is-approved' :
-                                       (utilisateur.status == 'refuse' ? 'is-refused' : 'is-pending') }}">
-                                    {% if utilisateur.status == 'accepte' %}
+                                    {{ utilisateur.status == 'accepted' ? 'is-approved' :
+                                       (utilisateur.status == 'rejected' ? 'is-refused' : 'is-pending') }}">
+                                    {% if utilisateur.status == 'accepted' %}
                                         Approuvé
-                                    {% elseif utilisateur.status == 'refuse' %}
+                                    {% elseif utilisateur.status == 'rejected' %}
                                         Refusé
                                     {% else %}
                                         En attente
