@@ -47,9 +47,9 @@ class AdminUserController extends AbstractController
         $utilisateurs = $qb->getQuery()->getResult();
 
         $tous = $userRepository->count([]);
-        $enAttente = $userRepository->count(['status' => 'en_attente']);
-        $approuves = $userRepository->count(['status' => 'accepte']);
-        $refuses = $userRepository->count(['status' => 'refuse']);
+        $enAttente = $userRepository->count(['status' => 'pending']);
+        $approuves = $userRepository->count(['status' => 'accepted']);
+        $refuses = $userRepository->count(['status' => 'rejected']);
 
         return $this->render('admin/admin_user/index.html.twig', [
             'utilisateurs' => $utilisateurs,
@@ -62,11 +62,84 @@ class AdminUserController extends AbstractController
         ]);
     }
 
-    // #[Route('/utilisateurs/{id}', name: 'admin_utilisateur_detail', methods: ['GET'])]
-    // public function detail(User $user): Response
-    // {
-    //     return $this->render('admin/utilisateurs/detail.html.twig', [
-    //         'utilisateur' => $user,
-    //     ]);
-    // }
+    #[Route('/admin/user/{id}', name: 'admin.user.show', methods: ['GET'])]
+    public function shoW(UserRepository $repos, string $id): Response
+    {
+
+        return $this->render('admin/admin_user/show.html.twig', [
+            "user" => $repos->find($id)
+        ]);
+    }
+
+    #[Route(
+        '/admin/user/{id}/status',
+        name: 'admin.user.status',
+        methods: ['POST']
+    )]
+    #[IsGranted('ROLE_ADMIN')]
+    public function updateStatus(
+        User $user,
+        Request $request,
+        EntityManagerInterface $entityManager
+    ): Response {
+        if (!$this->isCsrfTokenValid(
+            'status'.$user->getId(),
+            $request->request->get('_token')
+        )) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $status = $request->request->get('status');
+
+        if (!in_array($status, ['accepted', 'rejected', 'suspend'], true)) {
+            throw $this->createNotFoundException('Statut invalide.');
+        }
+
+        $user->setStatus($status);
+
+        $entityManager->flush();
+
+        $this->addFlash(
+            'success',
+            $status === 'accepted'
+                ? 'Utilisateur accepté avec succès.'
+                : 'Utilisateur refusé avec succès.'
+        );
+
+        $this->addFlash(
+            'success',
+            $status === 'suspend'
+                ? 'Utilisateur suspendu.'
+                : "" 
+        );
+
+        return $this->redirectToRoute('app.admin.user');
+    }
+
+    #[Route(
+        '/admin/user/{id}/delete',
+        name: 'admin.user.delete',
+        methods: ['POST']
+    )]
+    #[IsGranted('ROLE_ADMIN')]
+    public function delete(
+        User $user,
+        Request $request,
+        EntityManagerInterface $entityManager
+    ): Response {
+        if (!$this->isCsrfTokenValid(
+            'delete'.$user->getId(),
+            $request->request->get('_token')
+        )) {
+            throw $this->createAccessDeniedException();
+        }
+
+        $entityManager->remove($user);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Utilisateur supprimé avec succès.');
+
+        return $this->redirectToRoute('app.admin.user');
+    }
+
 }

@@ -2,7 +2,7 @@
 
         <a href="{{ path('home') }}" class="home-logo">
             <i class="fa-solid fa-truck-fast"></i>
-            <span>Fleet<span>Manager</span></span>
+            <span>Fleet<span class="manage">Manager</span></span>
         </a>
 
         <input type="checkbox" id="menu-toggle" class="home-menu-toggle">
@@ -42,15 +42,15 @@
         <div class="home-nav-actions">
             {% if app.user %}
 
-            {% if is_granted('ROLE_ADMIN') %}
-                <a href="{{ path('admin_dashboard') }}" class="home-parent">
-                    <h1 class="profile">{{ app.user.firstName|slice(0, 1)|upper }}</h1>
-                </a>
-            {% else %}
-                <a href="{{ path('dashboard') }}" class="home-parent">
-                    <h1 class="profile">{{ app.user.firstName|slice(0, 1)|upper }}</h1>
-                </a>
-            {% endif %}
+                {% if is_granted('ROLE_ADMIN') %}
+                    <a href="{{ path('admin_dashboard') }}" class="home-parent">
+                        <h1 class="profile">{{ app.user.firstName|slice(0, 1)|upper }}</h1>
+                    </a>
+                {% else %}
+                    <a href="{{ path('dashboard') }}" class="home-parent">
+                        <h1 class="profile">{{ app.user.firstName|slice(0, 1)|upper }}</h1>
+                    </a>
+                {% endif %}
 
                 
                 <a href="{{ path('app_logout') }}" class="home-btn home-btn-primary">

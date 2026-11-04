@@ -52,13 +52,13 @@
 
     <article class="stat-card" id="vehicules">
         <div class="stat-card-top">
-            <span>Véhicules</span>
+            <span>Réfusé</span>
             <span class="stat-icon purple">
                 <i class="fa-solid fa-car-side"></i>
             </span>
         </div>
-        <strong class="stat-number">{{ totalVehicles }}</strong>
-        <span class="stat-caption">Véhicules enregistrés</span>
+        <strong class="stat-number">{{ totalRefuses }}</strong>
+        <span class="stat-caption">Comptes refusés</span>
     </article>
 </section>
 
@@ -85,9 +85,11 @@
                     <tr>
                         <td>
                             <div class="company-cell">
-                                <span class="company-avatar">
-                                    {{ user.nameCompany|first|upper }}
-                                </span>
+                                <a href="{{ path('admin.user.show', {'id': user.id}) }}">
+                                    <span class="company-avatar">
+                                        {{ user.nameCompany|first|upper }}
+                                    </span>
+                                </a>
                                 <strong>{{ user.nameCompany }}</strong>
                             </div>
                         </td>

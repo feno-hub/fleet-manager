@@ -51,7 +51,7 @@
                     <a href="{{ path('app.admin.subscription') }}"
                         class="{{ app.request.attributes.get('_route') == 'app.admin.subscription' ? 'active' : '' }}"
                     >
-                        <i class="fa-solid fa-users"></i>
+                        <i class="fa-solid fa-money-check-dollar"></i>
                         <span>Abonnemnts</span>
                     </a>
 
@@ -126,5 +126,6 @@
     </div>
 
     {% block javascripts %}{% endblock %}
+    <script src="{{ asset('assets/fontawesome/js/all.min.js') }}"></script>
 </body>
 </html>

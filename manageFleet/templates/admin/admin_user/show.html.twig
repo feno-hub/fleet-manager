@@ -1,0 +1,382 @@
+
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %}Gestion des utilisateurs - FleetManager{% endblock %}
+{% block page_title %}
+    Détail d' un utilisateur
+{% endblock %}
+
+{% block body %}
+
+    <div class="user-detail-page">
+
+        <div class="page-header">
+            <div>
+                <div class="breadcrumb">
+                    <a href="">Utilisateurs</a>
+                    <i class="fas fa-chevron-right"></i>
+                    <span>Détail utilisateur</span>
+                </div>
+                <h1>Détail de l'utilisateur</h1>
+                <p>Consultez les informations du compte et de l'entreprise.</p>
+            </div>
+
+            <a href="{{ path('app.admin.user') }}" class="btn-back">
+                <i class="fas fa-arrow-left"></i>
+                Retour à la liste
+            </a>
+        </div>
+
+        <div class="user-profile-card">
+            <div class="profile-banner"></div>
+
+            <div class="profile-content">
+                <div class="profile-avatar">
+                    {{ user.firstname|default('U')|first|upper }}
+                    {{ user.lastname|default('S')|first|upper }}
+                </div>
+
+                <div class="profile-main">
+                    <div class="profile-name">
+                        <div>
+                            <h2>{{ user.firstname }} {{ user.lastname }} </h2>
+                            <p>Administrateur d'entreprise</p>
+                        </div>
+
+                        {% if user.status == "accepted" %}
+                            <span class="status-badge status-approved">
+                                <i class="fas fa-check-circle"></i>
+                                Approuvé
+                            </span>
+                        {% elseif user.status == 'rejected' %} 
+                            <span class="status-badge status-rejected">
+                                <i class="fas fa-check-circle"></i>
+                                réjeté
+                            </span>
+                        {% else %}
+                            <span class="status-badge status-pending">
+                                <i class="fas fa-check-circle"></i>
+                                en_attente
+                            </span>
+                        {% endif %}
+                    </div>
+
+                    <div class="profile-meta">
+                        <span>
+                            <i class="fas fa-envelope"></i>
+                           {{ user.email }}
+                        </span>
+                        <span>
+                            <i class="fas fa-calendar-alt"></i>
+                            Inscrit le {{ user.createdAt|date('d F Y', 'Europe/Paris') }}
+
+                        </span>
+                        <span>
+                            <i class="fas fa-building"></i>
+                            {{ user.nameCompany|default('Entreprise non renseignée') }}
+                        </span>
+                    </div>
+                </div>
+
+                <div class="profile-actions">
+                    {% if user.status == "pending" %}
+                        <form
+                            action="{{ path('admin.user.status', {id: user.id}) }}"
+                            method="POST"
+                        >
+                            <input
+                                type="hidden"
+                                name="_token"
+                                value="{{ csrf_token('status' ~ user.id) }}"
+                            >
+
+                            <input type="hidden" name="status" value="accepted">
+
+                            <button type="submit" class="btn-accepted">
+                                <i class="fas fa-check"></i>
+                                Accepter
+                            </button>
+                        </form>
+
+                        <form
+                            action="{{ path('admin.user.status', {id: user.id}) }}"
+                            method="POST"
+                        >
+                            <input
+                                type="hidden"
+                                name="_token"
+                                value="{{ csrf_token('status' ~ user.id) }}"
+                            >
+
+                            <input type="hidden" name="status" value="rejected">
+
+                            <button type="submit" class="btn-delete">
+                                <i class="fas fa-times"></i>
+                                Refuser
+                            </button>
+                        </form>
+                    
+                    {% elseif user.status == 'accepted' %}    
+                        <form
+                            action="{{ path('admin.user.status', {id: user.id}) }}"
+                            method="POST"
+                        >
+                            <input
+                                type="hidden"
+                                name="_token"
+                                value="{{ csrf_token('status' ~ user.id) }}"
+                            >
+
+                            <input type="hidden" name="status" value="suspend">
+
+                            <button type="submit" class="btn-suspend">
+                                <i class="fas fa-check"></i>
+                                Suspendre
+                            </button>
+                        </form>
+
+                        <form
+                            action="{{ path('admin.user.delete', {id: user.id}) }}"
+                            method="POST"
+                            onsubmit="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?');"
+                        >
+                            <input
+                                type="hidden"
+                                name="_token"
+                                value="{{ csrf_token('delete' ~ user.id) }}"
+                            >
+
+                            <button type="submit" class="btn-delete">
+                                <i class="fas fa-trash"></i>
+                                Supprimer
+                            </button>
+                        </form>
+
+
+                    {% else %}
+                        
+                        <form
+                            action="{{ path('admin.user.delete', {id: user.id}) }}"
+                            method="POST"
+                            onsubmit="return confirm('Voulez-vous vraiment supprimer cet utilisateur ?');"
+                        >
+                            <input
+                                type="hidden"
+                                name="_token"
+                                value="{{ csrf_token('delete' ~ user.id) }}"
+                            >
+
+                            <button type="submit" class="btn-delete">
+                                <i class="fas fa-trash"></i>
+                                Supprimer
+                            </button>
+                        </form>
+    
+                    {% endif %}
+
+                </div>
+            </div>
+        </div>
+
+        <div class="detail-grid">
+
+            <div class="detail-card">
+                <div class="card-heading">
+                    <div class="heading-icon blue-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div>
+                        <h3>Informations personnelles</h3>
+                        <p>Informations générales du compte</p>
+                    </div>
+                </div>
+
+                <div class="detail-list">
+                    <div class="detail-item">
+                        <span>Identifiant</span>
+                        <strong>#US{{ user.id }}</strong>
+                    </div>
+                    <div class="detail-item">
+                        <span>Nom complet</span>
+                        <strong>{{ user.firstname }} {{ user.lastname }}</strong>
+                    </div>
+                    <div class="detail-item">
+                        <span>Adresse e-mail</span>
+                        <strong>{{ user.email }} </strong>
+                    </div>
+                    <div class="detail-item">
+                        <span>Téléphone</span>
+                        <strong>+261 {{ user.phone }}</strong>
+                    </div>
+                    <div class="detail-item">
+                        <span>Rôle</span>
+                        {% if is_granted("ROLE_USER") %}
+                            <strong>Utilisateur</strong>
+                        {% else %}
+                            <strong>Administrateur</strong>                            
+                        {% endif %}
+                    </div>
+                    <div class="detail-item">
+                        <span>Date d'inscription</span>
+                        <strong>{{ user.createdAt|date('d F Y', 'Europe/Paris') }} </strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-card">
+                <div class="card-heading">
+                    <div class="heading-icon purple-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div>
+                        <h3>Informations de l'entreprise</h3>
+                        <p>Entreprise associée à ce compte</p>
+                    </div>
+                </div>
+
+                <div class="company-profile">
+                    <div class="company-logo">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <div>
+                        <h4>{{ user.nameCompany }} </h4>
+                        <span>{{ user.sector }} </span>
+                    </div>
+                </div>
+
+                <div class="detail-list">
+                    <div class="detail-item">
+                        <span>Nom de l'entreprise</span>
+                        <strong>{{ user.nameCompany }} </strong>
+                    </div>
+                    <div class="detail-item">
+                        <span>NIF</span>
+                        <strong>{{ user.nif }}</strong>
+                    </div>
+                    <div class="detail-item">
+                        <span>Secteur d'activité</span>
+                        <strong>{{ user.sector }} </strong>
+                    </div>
+                    <div class="detail-item">
+                        <span>Adresse</span>
+                        <strong>{{ user.addressCompany }} </strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-card subscription-card">
+                <div class="card-heading">
+                    <div class="heading-icon orange-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <div>
+                        <h3>Abonnement</h3>
+                        <p>Offre actuellement associée au compte</p>
+                    </div>
+                </div>
+
+                <div class="subscription-plan">
+                    <div>
+                        <span class="plan-label">Offre actuelle</span>
+                        <h2>Premium</h2>
+                        <p>Gestion avancée de la flotte</p>
+                    </div>
+                    <span class="plan-icon">
+                        <i class="fas fa-gem"></i>
+                    </span>
+                </div>
+
+                <div class="detail-list">
+                    <div class="detail-item">
+                        <span>Prix mensuel</span>
+                        <strong class="highlight-price">300 000 Ar</strong>
+                    </div>
+                    <div class="detail-item">
+                        <span>Date de début</span>
+                        <strong>15 octobre 2026</strong>
+                    </div>
+                    <div class="detail-item">
+                        <span>Date de fin</span>
+                        <strong>15 novembre 2026</strong>
+                    </div>
+                    <div class="detail-item">
+                        <span>Statut</span>
+                        <strong>
+                            <span class="status-badge status-approved">Actif</span>
+                        </strong>
+                    </div>
+                </div>
+            </div>
+
+            <div class="detail-card">
+                <div class="card-heading">
+                    <div class="heading-icon green-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div>
+                        <h3>Résumé de l'activité</h3>
+                        <p>Vue générale de l'entreprise</p>
+                    </div>
+                </div>
+
+                <div class="activity-stats">
+                    <div class="activity-stat">
+                        <div class="activity-icon blue-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <div>
+                            <span>Véhicules</span>
+                            <strong>24</strong>
+                        </div>
+                    </div>
+
+                    <div class="activity-stat">
+                        <div class="activity-icon purple-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div>
+                            <span>Conducteurs</span>
+                            <strong>18</strong>
+                        </div>
+                    </div>
+
+                    <div class="activity-stat">
+                        <div class="activity-icon green-icon">
+                            <i class="fas fa-road"></i>
+                        </div>
+                        <div>
+                            <span>Trajets effectués</span>
+                            <strong>156</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="activity-note">
+                    <i class="fas fa-info-circle"></i>
+                    <p>Ces statistiques sont des exemples de présentation.</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="danger-zone">
+            <div>
+                <h3>Zone de gestion du compte</h3>
+                <p>Les actions ci-dessous sont uniquement visuelles pour le moment.</p>
+            </div>
+
+            <div class="danger-actions">
+                <a href="#" class="btn-suspend">
+                    <i class="fas fa-ban"></i>
+                    Suspendre le compte
+                </a>
+                <a href="#" class="btn-delete">
+                    <i class="fas fa-trash-alt"></i>
+                    Supprimer le compte
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}

@@ -125,39 +125,39 @@
                     </tr>
                 </thead>
                 <tbody>
-                    {% for utilisateur in utilisateurs %}
+                    {% for user in utilisateurs %}
                         <tr>
                             <td>
                                 <div class="admin-users__identity">
                                     <div class="admin-users__avatar">
-                                        {{ utilisateur.firstName|default('U')|slice(0, 1)|upper }}
-                                        {{ utilisateur.lastName|default('')|slice(0, 1)|upper }}
+                                        {{ user.firstName|default('U')|slice(0, 1)|upper }}
+                                        {{ user.lastName|default('')|slice(0, 1)|upper }}
                                     </div>
                                     <div>
                                         <strong>
-                                            {{ utilisateur.firstName }}
-                                            {{ utilisateur.lastName }}
+                                            {{ user.firstName }}
+                                            {{ user.lastName }}
                                         </strong>
-                                        <span>{{ utilisateur.email }}</span>
+                                        <span>{{ user.email }}</span>
                                     </div>
                                 </div>
                             </td>
 
                             <td>
-                                {{ utilisateur.nameCompany|default('Non renseignée') }}
+                                {{ user.nameCompany|default('Non renseignée') }}
                             </td>
 
                             <td>
-                                {{ utilisateur.phone|default('Non renseigné') }}
+                                {{ user.phone|default('Non renseigné') }}
                             </td>
 
                             <td>
                                 <span class="admin-users__badge
-                                    {{ utilisateur.status == 'accepted' ? 'is-approved' :
-                                       (utilisateur.status == 'rejected' ? 'is-refused' : 'is-pending') }}">
-                                    {% if utilisateur.status == 'accepted' %}
+                                    {{ user.status == 'accepted' ? 'is-approved' :
+                                       (user.status == 'rejected' ? 'is-refused' : 'is-pending') }}">
+                                    {% if user.status == 'accepted' %}
                                         Approuvé
-                                    {% elseif utilisateur.status == 'rejected' %}
+                                    {% elseif user.status == 'rejected' %}
                                         Refusé
                                     {% else %}
                                         En attente
@@ -167,7 +167,7 @@
 
                             <td>
                                 <a
-                                    href=""
+                                    href="{{ path('admin.user.show', {'id': user.id}) }}"
                                     class="admin-users__action"
                                     title="Voir les détails"
                                 >

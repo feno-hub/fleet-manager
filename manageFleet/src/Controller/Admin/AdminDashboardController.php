@@ -32,7 +32,9 @@ class AdminDashboardController extends AbstractController
             'approvedUsers' => $userRepository->count([
                 'status' => 'accepted',
             ]),
-            'totalVehicles' => $vehicleRepository->count([]),
+            'totalRefuses' => $userRepository->count([
+                'status' => 'rejected'
+            ]),
             'recentUsers' => $users,
         ]);
     }
