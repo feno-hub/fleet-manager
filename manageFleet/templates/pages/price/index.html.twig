@@ -92,195 +92,83 @@
 
             <div class="pricing-grid">
 
-                <article class="pricing-card">
-                    <div class="pricing-card-top">
-                        <span class="pricing-plan-icon pricing-plan-icon-starter">
-                            <i class="fa-solid fa-car"></i>
-                        </span>
+                {% for subscription in subscriptions %}
+                    <article class="pricing-card pricing-card-popular">
 
-                        <h3>Starter</h3>
+                        {% if subscription.isPopular %}
+                            <div class="pricing-popular-label">
+                                <i class="fa-solid fa-star"></i>
+                                LE PLUS POPULAIRE
+                            </div>
+                        {% endif %}
 
-                        <p class="pricing-plan-description">
-                            Pour les petites entreprises qui souhaitent
-                            organiser leur flotte.
-                        </p>
+                        <div class="pricing-card-top">
+                            {% if subscription.isPopular %}
+                                <span class="pricing-plan-icon pricing-plan-icon-business">
+                                    <i class="fa-solid fa-chart-line"></i>
+                                </span>
+                            {% endif %}
 
-                        <div class="pricing-price">
-                            <span class="pricing-currency">Ar</span>
-                            <strong>29 000</strong>
-                            <span class="pricing-period">/ mois</span>
+                            <h3>{{ subscription.name }} </h3>
+
+                            <p class="pricing-plan-description">
+                                {{ subscription.description|slice(0, 60) }} ...
+                            </p>
+
+                            <div class="pricing-price">
+                                <span class="pricing-currency">Ar</span>
+                                <strong>{{ subscription.price }} </strong>
+                                <span class="pricing-period">/ mois</span>
+                            </div>
+
+                            <p class="pricing-price-note">
+                                Facturation mensuelle
+                            </p>
+
+                            <a href="{{ path('app_register') }}" class="pricing-btn pricing-btn-filled">
+                                Choisir {{ subscription.name }}
+                                <i class="fa-solid fa-arrow-right"></i>
+                            </a>
                         </div>
 
-                        <p class="pricing-price-note">
-                            Facturation mensuelle
-                        </p>
+                        <div class="pricing-card-divider"></div>
 
-                        <a href="{{ path('app_register') }}" class="pricing-btn pricing-btn-outline">
-                            Choisir Starter
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                    </div>
+                        <div class="pricing-features">
+                            <h4>Tout Starter, plus :</h4>
 
-                    <div class="pricing-card-divider"></div>
-
-                    <div class="pricing-features">
-                        <h4>Fonctionnalités incluses</h4>
-
-                        <ul>
-                            <li>
-                                <i class="fa-solid fa-check"></i>
-                                Jusqu'à 10 véhicules
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-check"></i>
-                                Fiches détaillées des véhicules
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-check"></i>
-                                Suivi des entretiens
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-check"></i>
-                                Historique des opérations
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-check"></i>
-                                Tableau de bord essentiel
-                            </li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="pricing-card pricing-card-popular">
-                    <div class="pricing-popular-label">
-                        <i class="fa-solid fa-star"></i>
-                        LE PLUS POPULAIRE
-                    </div>
-
-                    <div class="pricing-card-top">
-                        <span class="pricing-plan-icon pricing-plan-icon-business">
-                            <i class="fa-solid fa-chart-line"></i>
-                        </span>
-
-                        <h3>Business</h3>
-
-                        <p class="pricing-plan-description">
-                            Pour les entreprises qui souhaitent optimiser
-                            le suivi de leurs véhicules.
-                        </p>
-
-                        <div class="pricing-price">
-                            <span class="pricing-currency">Ar</span>
-                            <strong>79 000</strong>
-                            <span class="pricing-period">/ mois</span>
+                            <ul>
+                                <li>
+                                    <i class="fa-solid fa-check"></i>
+                                    Jusqu'à 50 véhicules
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-check"></i>
+                                    Suivi détaillé des dépenses
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-check"></i>
+                                    Planification de la maintenance
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-check"></i>
+                                    Rapports de gestion
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-check"></i>
+                                    Gestion des documents
+                                </li>
+                                <li>
+                                    <i class="fa-solid fa-check"></i>
+                                    Assistance prioritaire
+                                </li>
+                            </ul>
                         </div>
-
-                        <p class="pricing-price-note">
-                            Facturation mensuelle
-                        </p>
-
-                        <a href="{{ path('app_register') }}" class="pricing-btn pricing-btn-filled">
-                            Choisir Business
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                    </div>
-
-                    <div class="pricing-card-divider"></div>
-
-                    <div class="pricing-features">
-                        <h4>Tout Starter, plus :</h4>
-
-                        <ul>
-                            <li>
-                                <i class="fa-solid fa-check"></i>
-                                Jusqu'à 50 véhicules
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-check"></i>
-                                Suivi détaillé des dépenses
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-check"></i>
-                                Planification de la maintenance
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-check"></i>
-                                Rapports de gestion
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-check"></i>
-                                Gestion des documents
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-check"></i>
-                                Assistance prioritaire
-                            </li>
-                        </ul>
-                    </div>
-                </article>
-
-                <article class="pricing-card">
-                    <div class="pricing-card-top">
-                        <span class="pricing-plan-icon pricing-plan-icon-enterprise">
-                            <i class="fa-solid fa-building"></i>
-                        </span>
-
-                        <h3>Enterprise</h3>
-
-                        <p class="pricing-plan-description">
-                            Pour les grandes flottes nécessitant une
-                            gestion plus complète.
-                        </p>
-
-                        <div class="pricing-price">
-                            <span class="pricing-currency">Ar</span>
-                            <strong>199 000</strong>
-                            <span class="pricing-period">/ mois</span>
-                        </div>
-
-                        <p class="pricing-price-note">
-                            Facturation mensuelle
-                        </p>
-
-                        <a href="{{ path('app_register') }}" class="pricing-btn pricing-btn-outline">
-                            Choisir Enterprise
-                            <i class="fa-solid fa-arrow-right"></i>
-                        </a>
-                    </div>
-
-                    <div class="pricing-card-divider"></div>
-
-                    <div class="pricing-features">
-                        <h4>Tout Business, plus :</h4>
-
-                        <ul>
-                            <li>
-                                <i class="fa-solid fa-check"></i>
-                                Jusqu'à 200 véhicules
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-check"></i>
-                                Rapports avancés
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-check"></i>
-                                Gestion multi-sites
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-check"></i>
-                                Gestion des accès utilisateurs
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-check"></i>
-                                Accompagnement personnalisé
-                            </li>
-                            <li>
-                                <i class="fa-solid fa-check"></i>
-                                Support dédié
-                            </li>
-                        </ul>
-                    </div>
-                </article>
+                    </article>
+                {% else %}
+                    <article class="pricing-card pricing-card-popular">
+                        <span>Aucune abonnement disponible</span>
+                    </article>
+                {% endfor %}
 
             </div>
 

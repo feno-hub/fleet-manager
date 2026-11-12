@@ -21,6 +21,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
+    #[ORM\ManyToOne(inversedBy: 'subscription')]
+    private ?SubscriptionCategory $subscriptionCategory = null;
+
     #[ORM\Column(length: 255)]
     private ?string $first_name = null;
 
@@ -83,10 +86,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->vehicles = new ArrayCollection();
     }
 
-
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getSubscriptionCategory(): ?SubscriptionCategory
+    {
+        return $this->subscriptionCategory;
+    }
+
+    public function setSubscriptionCategory(?SubscriptionCategory $subscriptionCategory): static
+    {
+        $this->subscriptionCategory = $subscriptionCategory;
+
+        return $this;
     }
 
     public function getEmail(): ?string

@@ -1,0 +1,207 @@
+
+{% extends 'layouts/admin.html.twig' %}
+
+{% block title %}Ajouter une catégorie - FleetManager{% endblock %}
+
+{% block body %}
+
+<div class="category-create">
+
+    <div class="category-header">
+        <div class="category-header-content">
+            <h1>Ajouter une catégorie</h1>
+            <p>Créez un nouveau forfait d'abonnement pour les entreprises.</p>
+        </div>
+
+        <a href="{{ path('admin.subscription.list') }}" class="btn-back">
+            <i class="fa-solid fa-arrow-left"></i>
+            Retour
+        </a>
+    </div>
+
+    {{ form_start(form, {'attr': {'class': 'category-form'}}) }}
+
+        <div class="form-section">
+
+            <h2>
+                <i class="fa-solid fa-crown"></i>
+                Informations du forfait
+            </h2>
+
+            <div class="form-group">
+                {{ form_label(form.name, 'Nom du forfait', {
+                    'label_attr': {'class': 'form-label'}
+                }) }}
+
+                <div class="form-input-wrapper">
+                    <i class="fa-solid fa-tag form-icon"></i>
+                    {{ form_widget(form.name, {
+                        'attr': {'class': 'form-control'}
+                    }) }}
+                </div>
+
+                {{ form_errors(form.name) }}
+            </div>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    {{ form_label(form.price, 'Prix (Ar)', {
+                        'label_attr': {'class': 'form-label'}
+                    }) }}
+
+                    <div class="form-input-wrapper">
+                        <i class="fa-solid fa-money-bill-wave form-icon"></i>
+                        {{ form_widget(form.price, {
+                            'attr': {'class': 'form-control'}
+                        }) }}
+                    </div>
+
+                    {{ form_errors(form.price) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.duration, 'Durée (jours)', {
+                        'label_attr': {'class': 'form-label'}
+                    }) }}
+
+                    <div class="form-input-wrapper">
+                        <i class="fa-regular fa-calendar-days form-icon"></i>
+                        {{ form_widget(form.duration, {
+                            'attr': {'class': 'form-control'}
+                        }) }}
+                    </div>
+
+                    {{ form_errors(form.duration) }}
+                </div>
+
+            </div>
+        </div>
+
+        <div class="form-section">
+
+            <h2>
+                <i class="fa-solid fa-car"></i>
+                Limites du forfait
+            </h2>
+
+            <div class="form-grid">
+
+                <div class="form-group">
+                    {{ form_label(form.vehicle_limit, 'Nombre de véhicules', {
+                        'label_attr': {'class': 'form-label'}
+                    }) }}
+
+                    <div class="form-input-wrapper">
+                        <i class="fa-solid fa-car-side form-icon"></i>
+                        {{ form_widget(form.vehicle_limit, {
+                            'attr': {'class': 'form-control'}
+                        }) }}
+                    </div>
+
+                    {{ form_errors(form.vehicle_limit) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_label(form.driver_limit, 'Nombre de conducteurs', {
+                        'label_attr': {'class': 'form-label'}
+                    }) }}
+
+                    <div class="form-input-wrapper">
+                        <i class="fa-solid fa-users form-icon"></i>
+                        {{ form_widget(form.driver_limit, {
+                            'attr': {'class': 'form-control'}
+                        }) }}
+                    </div>
+
+                    {{ form_errors(form.driver_limit) }}
+                </div>
+
+            </div>
+        </div>
+
+        <div class="form-section">
+
+            <h2>
+                <i class="fa-solid fa-align-left"></i>
+                Description et statut
+            </h2>
+
+            <div class="form-group">
+                {{ form_label(form.description, 'Description du forfait', {
+                    'label_attr': {'class': 'form-label'}
+                }) }}
+
+                {{ form_widget(form.description, {
+                    'attr': {
+                        'class': 'form-control form-textarea',
+                        'rows': 4
+                    }
+                }) }}
+
+                {{ form_errors(form.description) }}
+            </div>
+
+            <div class="form-group">
+                {{ form_label(form.status, 'Statut', {
+                    'label_attr': {'class': 'form-label'}
+                }) }}
+
+                <div class="form-input-wrapper">
+                    <i class="fa-solid fa-toggle-on form-icon"></i>
+                    {{ form_widget(form.status, {
+                        'attr': {'class': 'form-control'}
+                    }) }}
+                </div>
+
+                {{ form_errors(form.status) }}
+            </div>
+
+        </div>
+
+        <div class="form-section popular-section">
+
+            <h2>
+                <i class="fa-solid fa-star"></i>
+                Mise en avant du forfait
+            </h2>
+
+            <div class="popular-option">
+                <div class="popular-checkbox">
+                    {{ form_widget(form.isPopular) }}
+                </div>
+
+                <div class="popular-content">
+                    {{ form_label(form.isPopular, null, {
+                        'label_attr': {'class': 'popular-label'}
+                    }) }}
+
+                    <p>
+                        Afficher le badge « LE PLUS POPULAIRE »
+                        sur ce forfait dans la page d'accueil.
+                    </p>
+                </div>
+            </div>
+
+            {{ form_errors(form.isPopular) }}
+
+        </div>
+
+        <div class="form-actions">
+
+            <a href="{{ path('admin.subscription.list') }}" class="btn-cancel">
+                Annuler
+            </a>
+
+            <button type="submit" class="btn-submit">
+                <i class="fa-solid fa-plus"></i>
+                Créer le forfait
+            </button>
+
+        </div>
+
+    {{ form_end(form) }}
+
+</div>
+
+{% endblock %}

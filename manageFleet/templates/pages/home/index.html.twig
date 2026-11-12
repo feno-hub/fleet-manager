@@ -34,7 +34,7 @@
                 </p>
 
                 <div class="home-hero-actions">
-                    <a href="register.html" class="home-btn home-btn-primary">
+                    <a href="{{ path('app_register') }}" class="home-btn home-btn-primary">
                         Découvrir la plateforme
                         <i class="fa-solid fa-arrow-right"></i>
                     </a>
@@ -139,7 +139,7 @@
                         Organisez les affectations, gérez les profils et
                         suivez les informations de vos conducteurs.
                     </p>
-                    <a href="#contact">En savoir plus <i class="fa-solid fa-arrow-right"></i></a>
+                    <a href="{{ path('contact') }}">En savoir plus <i class="fa-solid fa-arrow-right"></i></a>
                 </article>
 
                 <article class="home-feature-card">
@@ -256,43 +256,30 @@
 
             <div class="home-pricing-grid">
 
-                <article class="home-price-card">
-                    <h3>Starter</h3>
-                    <p>Pour commencer à organiser votre flotte.</p>
-                    <div class="home-price">Gratuit</div>
-                    <ul>
-                        <li><i class="fa-solid fa-check"></i> Gestion des véhicules</li>
-                        <li><i class="fa-solid fa-check"></i> Informations essentielles</li>
-                        <li><i class="fa-solid fa-check"></i> Accès au tableau de bord</li>
-                    </ul>
-                    <a href="{{ path('app_register') }}" class="home-btn home-btn-price">Choisir Starter</a>
-                </article>
-
-                <article class="home-price-card home-price-featured">
-                    <span class="home-price-badge">RECOMMANDÉ</span>
-                    <h3>Business</h3>
-                    <p>Pour les entreprises en développement.</p>
-                    <div class="home-price">Sur devis</div>
-                    <ul>
-                        <li><i class="fa-solid fa-check"></i> Gestion avancée des véhicules</li>
-                        <li><i class="fa-solid fa-check"></i> Suivi de la maintenance</li>
-                        <li><i class="fa-solid fa-check"></i> Gestion des conducteurs</li>
-                        <li><i class="fa-solid fa-check"></i> Rapports et statistiques</li>
-                    </ul>
-                    <a href="{{ path('app_register') }}" class="home-btn home-btn-primary">Choisir Business</a>
-                </article>
-
-                <article class="home-price-card">
-                    <h3>Enterprise</h3>
-                    <p>Pour les grandes flottes et les besoins spécifiques.</p>
-                    <div class="home-price">Personnalisé</div>
-                    <ul>
-                        <li><i class="fa-solid fa-check"></i> Fonctionnalités avancées</li>
-                        <li><i class="fa-solid fa-check"></i> Gestion multi-utilisateurs</li>
-                        <li><i class="fa-solid fa-check"></i> Rapports personnalisés</li>
-                    </ul>
-                    <a href="{{ path('contact') }}" class="home-btn home-btn-price">Nous contacter</a>
-                </article>
+                {% for subscription in subscriptions %}
+                    <article class="home-price-card">
+                        {% if subscription.isPopular %}
+                            <div class="pricing-popular-label">
+                                <i class="fa-solid fa-star"></i>
+                                LE PLUS POPULAIRE
+                            </div>
+                            <span class="pricing-plan-icon pricing-plan-icon-business">
+                                <i class="fa-solid fa-chart-line"></i>
+                            </span>
+                        {% endif %}
+                        <h3>{{ subscription.name }} </h3>
+                        <p>Pour commencer à organiser votre flotte.</p>
+                        <div class="home-price">{{ subscription.price }} Ar</div>
+                        <ul>
+                            <li><i class="fa-solid fa-check"></i> Gestion des véhicules</li>
+                            <li><i class="fa-solid fa-check"></i> Informations essentielles</li>
+                            <li><i class="fa-solid fa-check"></i> Accès au tableau de bord</li>
+                        </ul>
+                        <a href="{{ path('app_register') }}" class="home-btn home-btn-price">
+                           choisir {{ subscription.name }}
+                        </a>
+                    </article>
+                {% endfor %}
 
             </div>
         </section>

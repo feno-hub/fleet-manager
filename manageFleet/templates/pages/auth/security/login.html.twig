@@ -38,7 +38,9 @@
             <div class="login-field">
                 <label for="username">Adresse e-mail</label>
                 <div class="login-input-wrapper">
-                    <i class="fa-regular fa-envelope"></i>
+                    <span class="icon">
+                        <i class="fa-regular fa-envelope"></i>
+                    </span>
                     <input
                         type="email"
                         value="{{ last_username }}"
@@ -54,8 +56,12 @@
 
             <div class="login-field">
                 <label for="password">Mot de passe</label>
+
                 <div class="login-input-wrapper">
-                    <i class="fa-solid fa-lock"></i>
+                    <span class="icon">
+                        <i class="fa-solid fa-lock"></i>
+                    </span>
+
                     <input
                         type="password"
                         name="_password"
@@ -64,6 +70,15 @@
                         autocomplete="current-password"
                         required
                     >
+
+                    <button
+                        type="button"
+                        class="toggle-password"
+                        id="togglePassword"
+                        aria-label="Afficher le mot de passe"
+                    >
+                        <i class="fa-regular fa-eye" id="eyeIcon"></i>
+                    </button>
                 </div>
             </div>
 
@@ -96,4 +111,25 @@
 
     </div>
 </div>
+
+<script>
+    const togglePassword = document.getElementById('togglePassword');
+    const password = document.getElementById('password');
+    const eyeIcon = document.getElementById('eyeIcon');
+
+    togglePassword.addEventListener('click', function () {
+
+        const isHidden = password.type === 'password';
+
+        password.type = isHidden ? 'text' : 'password';
+
+        eyeIcon.classList.toggle('fa-eye', !isHidden);
+        eyeIcon.classList.toggle('fa-eye-slash', isHidden);
+
+        togglePassword.setAttribute(
+            'aria-label',
+            isHidden ? 'Masquer le mot de passe' : 'Afficher le mot de passe'
+        );
+    });
+</script>
 {% endblock %}
