@@ -90,10 +90,19 @@
                 </p>
             </div>
 
-            {% for message in app.flashes('success') %}
-                <div class="alert alert-success">
-                    {{ message }}
-                </div>
+            {# {% block label == "success" %}{% endblock %} #}
+
+           {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="admin-flash admin-flash-{{ label }}">
+                        <span>{{ message }}</span>
+                        <button type="button"
+                                onclick="this.parentElement.remove()"
+                                aria-label="Fermer">
+                            &times;
+                        </button>
+                    </div>
+                {% endfor %}
             {% endfor %}
 
             {{ form_start(form, {

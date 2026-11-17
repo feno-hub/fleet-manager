@@ -54,6 +54,13 @@
                         <i class="fa-solid fa-money-check-dollar"></i>
                         <span>Abonnemnts</span>
                     </a>
+                    
+                    <a href="{{ path('app.admin.message') }}"
+                        class="{{ app.request.attributes.get('_route') == 'app.admin.message' ? 'active' : '' }}"
+                    >
+                        <i class="fa-solid fa-comment-sms"></i>
+                        <span>Messages</span>
+                    </a>
 
                 </nav>
             </div>
